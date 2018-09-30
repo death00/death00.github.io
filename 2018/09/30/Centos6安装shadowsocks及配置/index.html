@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="&amp;emsp;&amp;emsp;买下搬瓦工的服务器，很多人首先会希望配置多个端口方便使用，这时候就需要安装shadowsocks来解决。">
+<meta name="description" content="买下搬瓦工的服务器，很多人首先会希望配置多个端口方便使用，这时候就需要安装shadowsocks来解决。现在我来介绍一下Centos6系统下shadowsocks的安装及配置过程。">
 <meta name="keywords" content="linux,shadowsocks">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Centos6安装shadowsocks及配置">
 <meta property="og:url" content="http://yoursite.com/2018/09/30/Centos6安装shadowsocks及配置/index.html">
 <meta property="og:site_name" content="death00">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;买下搬瓦工的服务器，很多人首先会希望配置多个端口方便使用，这时候就需要安装shadowsocks来解决。">
+<meta property="og:description" content="买下搬瓦工的服务器，很多人首先会希望配置多个端口方便使用，这时候就需要安装shadowsocks来解决。现在我来介绍一下Centos6系统下shadowsocks的安装及配置过程。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/death00/gitment-comments/blob/master/imgs/20171214113900502.png?raw=true">
 <meta property="og:image" content="https://github.com/death00/gitment-comments/blob/master/imgs/20171214114951081.png?raw=true">
 <meta property="og:image" content="https://github.com/death00/gitment-comments/blob/master/imgs/20171214115347347.png?raw=true">
-<meta property="og:updated_time" content="2018-09-30T03:20:48.748Z">
+<meta property="og:updated_time" content="2018-09-30T03:27:02.218Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Centos6安装shadowsocks及配置">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;买下搬瓦工的服务器，很多人首先会希望配置多个端口方便使用，这时候就需要安装shadowsocks来解决。">
+<meta name="twitter:description" content="买下搬瓦工的服务器，很多人首先会希望配置多个端口方便使用，这时候就需要安装shadowsocks来解决。现在我来介绍一下Centos6系统下shadowsocks的安装及配置过程。">
 <meta name="twitter:image" content="https://github.com/death00/gitment-comments/blob/master/imgs/20171214113900502.png?raw=true">
 
 
@@ -367,9 +367,9 @@
       
 
       
-        <p>&emsp;&emsp;买下搬瓦工的服务器，很多人首先会希望配置多个端口方便使用，这时候就需要安装shadowsocks来解决。<br><a id="more"></a><br>这篇文章原是我在CSDN上发表的一篇博客，但在去年年底时莫名其妙被删除了，因此在这里，我把文章搬运过来，也是方便自己查看里面的一些命令。</p>
+        <p>买下搬瓦工的服务器，很多人首先会希望配置多个端口方便使用，这时候就需要安装shadowsocks来解决。现在我来介绍一下Centos6系统下shadowsocks的安装及配置过程。<br><a id="more"></a></p>
+<p>这篇文章原是我在CSDN上发表的一篇博客，但在去年年底时莫名其妙被删除了，因此在这里，我把文章搬运过来，也是方便自己查看里面的一些命令。</p>
 <p><a href="https://www.bwgyhw.com/" target="_blank" rel="noopener">这是一个搬瓦工的购买教程网站</a></p>
-<p>买下搬瓦工的服务器，很多人首先会希望配置多个端口方便使用，这时候就需要安装shadowsocks来解决。现在我来介绍一下Centos6系统下的安装及配置过程：</p>
 <h2 id="安装python、pip、shadowsocks"><a href="#安装python、pip、shadowsocks" class="headerlink" title="安装python、pip、shadowsocks"></a>安装python、pip、shadowsocks</h2><p>安装python：<br>    <code>yum install python-setuptools</code></p>
 <p>安装wget<br>    <code>yum install wget</code></p>
 <p>安装pip：（先下载再安装）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://pypi.python.org/packages/source/p/pip/pip-1.3.1.tar.gz --no-check-certificate</span><br><span class="line">tar -xzvf pip-1.3.1.tar.gz</span><br><span class="line">cd pip-1.3.1</span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure></p>
