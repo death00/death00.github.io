@@ -81,13 +81,14 @@
 
 <meta name="description" content="all or nothing, now or never.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="death00">
-<meta property="og:url" content="http://yoursite.com/archives/2018/index.html">
+<meta property="og:title" content="tags">
+<meta property="og:url" content="http://yoursite.com/tags/index.html">
 <meta property="og:site_name" content="death00">
 <meta property="og:description" content="all or nothing, now or never.">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-30T01:52:31.628Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="death00">
+<meta name="twitter:title" content="tags">
 <meta name="twitter:description" content="all or nothing, now or never.">
 
 
@@ -118,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2018/"/>
+  <link rel="canonical" href="http://yoursite.com/tags/"/>
 
 
 
 
 
-  <title>归档 | death00</title>
+  <title>tags | death00</title>
   
 
 
@@ -153,7 +154,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -247,74 +248,43 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
 
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        嗯..! 目前共计 1 篇日志。 继续努力。
-      </span>
+	<h1 class="post-title" itemprop="name headline">tags</h1>
+
+
+
+</header>
 
       
-
+      
+      
+      <div class="post-body">
         
         
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
+          <div class="tag-cloud">
+            <div class="tag-cloud-title">
+                暂无标签
+            </div>
+            <div class="tag-cloud-tags">
+              
+            </div>
           </div>
         
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/09/29/初章/" itemprop="url">
-              
-                <span itemprop="name">初章</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-29T16:10:03+08:00"
-              content="2018-09-29" >
-          09-29
-        </time>
       </div>
-
-    </header>
-  </article>
-
-
-
       
-
+      
+      
     </div>
+    
+    
+    
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
@@ -322,6 +292,13 @@
 
 
           
+
+  
+    <div id="gitalk-container"></div>
+
+  
+
+
 
         </div>
         
@@ -519,6 +496,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -559,6 +540,21 @@
 
 
 
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'cdd22c7b695e669f49e1',
+          clientSecret: '9a5fbb28c437389a2505a531eb66e81f0d50fba5',
+          repo: 'gitment-comments',
+          owner: 'death00',
+          admin: ['death00'],
+          id: location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
 
 
   
