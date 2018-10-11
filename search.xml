@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[gitalk Error: Validation Failed]]></title>
+    <url>%2F2018%2F09%2F30%2Fgitalk%20Error%20Validation%20Failed%2F</url>
+    <content type="text"><![CDATA[我现在博客的评论系统用的是gitalk，网上教程有很多，我参考的是这份教程。 当我按照网上的说法搭好后，确实是可以利用issue进行评论了，但我在新发表文章时，竟然报错了： 当时我心里一凉，难道和gitment一样，gitalk也凉了？后来上网查了一下，发现是github现在要求issue的label name不能超过50。（奥，现在我才知道，原来gitalk应该是利用label进行筛选，取得当前评论所属的issus。但后来看了一下gitalk的源代码和github关于issue的api，issue的查找应该和你的number有关，而gitalk是当你没有number时就用id代替，看的有点晕。PS：本人在前端方面纯属小白） 好了，那就想想有什么办法可以保证名字的长度可以不超过50吧。没错，就是md5,加密过后都是32位长度，且唯一。当然了，这个也是在gitalk的issue里查到的，接下来就来看看具体应该怎么做吧。 找到js版的md5算法首推的自然是别人已经造好的成熟的轮子，JavaScript-MD5这个应该是可以的，亲测有效。 你只要在你的主题(比如我的就是next)下的source\js\src目录中创放入md5.js.min文件即可。 修改gitalk.swig文件原本你的文件内容应该是：12345678910111213141516&#123;% if page.comments &amp;&amp; theme.gitalk.enable %&#125; &lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/gitalk/dist/gitalk.css&quot;&gt; &lt;script src=&quot;https://unpkg.com/gitalk/dist/gitalk.min.js&quot;&gt;&lt;/script&gt; &lt;script type=&quot;text/javascript&quot;&gt; var gitalk = new Gitalk(&#123; clientID: &apos;&#123;&#123; theme.gitalk.ClientID &#125;&#125;&apos;, clientSecret: &apos;&#123;&#123; theme.gitalk.ClientSecret &#125;&#125;&apos;, repo: &apos;&#123;&#123; theme.gitalk.repo &#125;&#125;&apos;, owner: &apos;&#123;&#123; theme.gitalk.githubID &#125;&#125;&apos;, admin: [&apos;&#123;&#123; theme.gitalk.adminUser &#125;&#125;&apos;], id: location.pathname, distractionFreeMode: &apos;&#123;&#123; theme.gitalk.distractionFreeMode &#125;&#125;&apos; &#125;) gitalk.render(&apos;gitalk-container&apos;) &lt;/script&gt;&#123;% endif %&#125; 现在改成即可(修改了第4行和第12行)1234567891011121314151617&#123;% if page.comments &amp;&amp; theme.gitalk.enable %&#125; &lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/gitalk/dist/gitalk.css&quot;&gt; &lt;script src=&quot;https://unpkg.com/gitalk/dist/gitalk.min.js&quot;&gt;&lt;/script&gt; &lt;script src=&quot;/js/src/md5.min.js&quot;&gt;&lt;/script&gt; &lt;script type=&quot;text/javascript&quot;&gt; var gitalk = new Gitalk(&#123; clientID: &apos;&#123;&#123; theme.gitalk.ClientID &#125;&#125;&apos;, clientSecret: &apos;&#123;&#123; theme.gitalk.ClientSecret &#125;&#125;&apos;, repo: &apos;&#123;&#123; theme.gitalk.repo &#125;&#125;&apos;, owner: &apos;&#123;&#123; theme.gitalk.githubID &#125;&#125;&apos;, admin: [&apos;&#123;&#123; theme.gitalk.adminUser &#125;&#125;&apos;], id: md5(location.pathname), distractionFreeMode: &apos;&#123;&#123; theme.gitalk.distractionFreeMode &#125;&#125;&apos; &#125;) gitalk.render(&apos;gitalk-container&apos;) &lt;/script&gt;&#123;% endif %&#125; 然后重新发布就ok了，gitalk又可以正确创建issue了，你又可以继续评论了。 需要注意的问题因为gitalk关联issue是通过number，你没有number的时候，它会直接利用你的id，而id的这个生成条件又被你修改了，因此你之前评论是无法和你的文章关联上了。如果对js稍微感兴趣的话，应该可以顺着这个思路往下能解决。博主有空也会试试，就当研究研究js，大家要是有成功的案例，可以在通过评论告知，毕竟这也是造福大家。附上gitalk源码地址。]]></content>
+      <categories>
+        <category>解决问题</category>
+      </categories>
+      <tags>
+        <tag>gitalk</tag>
+        <tag>Error</tag>
+        <tag>Validation Failed</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Centos6安装shadowsocks及配置]]></title>
+    <url>%2F2018%2F09%2F30%2FCentos6%E5%AE%89%E8%A3%85shadowsocks%E5%8F%8A%E9%85%8D%E7%BD%AE%2F</url>
+    <content type="text"><![CDATA[买下搬瓦工的服务器，很多人首先会希望配置多个端口方便使用，这时候就需要安装shadowsocks来解决。现在我来介绍一下Centos6系统下shadowsocks的安装及配置过程。 这篇文章原是我在CSDN上发表的一篇博客，但在去年年底时莫名其妙被删除了，因此在这里，我把文章搬运过来，也是方便自己查看里面的一些命令。 这是一个搬瓦工的购买教程网站 安装python、pip、shadowsocks安装python： yum install python-setuptools 安装wget yum install wget 安装pip：（先下载再安装）1234wget https://pypi.python.org/packages/source/p/pip/pip-1.3.1.tar.gz --no-check-certificatetar -xzvf pip-1.3.1.tar.gzcd pip-1.3.1python setup.py install 安装shadowsocks pip install shadowsocks 配置shadowsocks首先创建配置文件/etc/shadowsocks.json touch /etc/shadowsocks.json 创建并编辑shadowsocks.json vi /etc/shadowsocks.json 现在要决定你是否需要开多端口，因为开出多个端口，每个端口的速度影响不大，但如果用同一个端口，速度会有所影响。 shadowsocks.json内容为：123456789101112&#123; &quot;server&quot;:&quot;你的IP地址&quot;, &quot;local_address&quot;: &quot;127.0.0.1&quot;, &quot;local_port&quot;:1080, &quot;port_password&quot;:&#123; &quot;端口号1&quot;:&quot;密码1&quot;, &quot;端口号2&quot;:&quot;密码2&quot; &#125;, &quot;timeout&quot;:600, &quot;method&quot;:&quot;rc4-md5&quot;, &quot;fast_open&quot;: false&#125; 对应你本地的shadowsocks配置为： 这时可以在Centos上运行shadowsocks服务： ssserver -c /etc/shadowsocks.json -d start 此时理论上你就可以科学上网了。 停止shadowsocks服务命令： ssserver -c /etc/shadowsocks.json -d stop 可能遇到的问题当你设置好配置文件并且启动之后，发现本地并不能上外网，其实可以通过shadowsocks的更新PAC功能查看是否可以连接外网： 如果更新失败，则代表无法连接外网，这时候请看一下你的服务器上设置的端口是否开启： netstat -ntlp 我开启了443、7788、7789、7790四个端口，如果你发现此处没有你的端口号，代表端口未打开 此时你需要先关闭shadowsocks，使用关闭命令，然后打开你所需要的端口。 利用iptables打开端口命令: /sbin/iptables -I INPUT -p tcp --dport 端口号 -j ACCEPT 保存你刚刚添加的规则: /etc/rc.d/init.d/iptables save 查看打开的端口： /etc/init.d/iptables status 现在这里会显示出你刚刚打开的端口。 现在开启你服务器上的shadowsocks，再用查看端口命令，应该就显示出你的端口已经打开了。 资源下载shadowsocks相关下载包安卓版本官方下载电脑版Windows 7及之前的版本电脑版Windows 8及之后的版本iOS教程]]></content>
+      <categories>
+        <category>服务器</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>shadowsocks</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[初章]]></title>
+    <url>%2F2018%2F09%2F29%2F%E5%88%9D%E7%AB%A0%2F</url>
+    <content type="text"><![CDATA[第一次使用hexo写博客，希望能有一个不错的开始。]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+</search>
