@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="linux,shadowsocks," />
+  <meta name="keywords" content="Java," />
 
 
 
@@ -79,22 +79,18 @@
 
 
 
-<meta name="description" content="买下搬瓦工的服务器，很多人首先会希望配置多个端口方便使用，这时候就需要安装shadowsocks来解决。现在我来介绍一下Centos6系统下shadowsocks的安装及配置过程。">
-<meta name="keywords" content="linux,shadowsocks">
+<meta name="description" content="无论是B/S还是C/S架构，如果你用的是长连接，那么心跳是必不可少的。Netty提供了对心跳机制的天然支持，今天结合例子特地学习了一下。">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Centos6安装shadowsocks及配置">
-<meta property="og:url" content="http://yoursite.com/2018/09/30/Centos6安装shadowsocks及配置/index.html">
+<meta property="og:title" content="Netty 心跳相关(1)">
+<meta property="og:url" content="http://yoursite.com/2018/10/23/Netty-心跳相关/index.html">
 <meta property="og:site_name" content="death00">
-<meta property="og:description" content="买下搬瓦工的服务器，很多人首先会希望配置多个端口方便使用，这时候就需要安装shadowsocks来解决。现在我来介绍一下Centos6系统下shadowsocks的安装及配置过程。">
+<meta property="og:description" content="无论是B/S还是C/S架构，如果你用的是长连接，那么心跳是必不可少的。Netty提供了对心跳机制的天然支持，今天结合例子特地学习了一下。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://github.com/death00/gitment-comments/blob/master/imgs/20171214113900502.png?raw=true">
-<meta property="og:image" content="https://github.com/death00/gitment-comments/blob/master/imgs/20171214114951081.png?raw=true">
-<meta property="og:image" content="https://github.com/death00/gitment-comments/blob/master/imgs/20171214115347347.png?raw=true">
-<meta property="og:updated_time" content="2018-09-30T03:27:02.218Z">
+<meta property="og:updated_time" content="2018-10-23T11:44:39.473Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Centos6安装shadowsocks及配置">
-<meta name="twitter:description" content="买下搬瓦工的服务器，很多人首先会希望配置多个端口方便使用，这时候就需要安装shadowsocks来解决。现在我来介绍一下Centos6系统下shadowsocks的安装及配置过程。">
-<meta name="twitter:image" content="https://github.com/death00/gitment-comments/blob/master/imgs/20171214113900502.png?raw=true">
+<meta name="twitter:title" content="Netty 心跳相关(1)">
+<meta name="twitter:description" content="无论是B/S还是C/S架构，如果你用的是长连接，那么心跳是必不可少的。Netty提供了对心跳机制的天然支持，今天结合例子特地学习了一下。">
 
 
 
@@ -124,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/09/30/Centos6安装shadowsocks及配置/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/10/23/Netty-心跳相关/"/>
 
 
 
 
 
-  <title>Centos6安装shadowsocks及配置 | death00</title>
+  <title>Netty 心跳相关(1) | death00</title>
   
 
 
@@ -301,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/30/Centos6安装shadowsocks及配置/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/23/Netty-心跳相关/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="death00">
@@ -318,7 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Centos6安装shadowsocks及配置</h1>
+          <h1 class="post-title" itemprop="name headline">Netty 心跳相关(1)</h1>
         
 
         <div class="post-meta">
@@ -330,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-30T10:29:05+08:00">
-                2018-09-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-23T15:49:14+08:00">
+                2018-10-23
               </time>
             
 
@@ -353,8 +349,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
+                  <a href="/categories/Netty/" itemprop="url" rel="index">
+                    <span itemprop="name">Netty</span>
                   </a>
                 </span>
 
@@ -370,7 +366,7 @@
 
           
           
-             <span id="/2018/09/30/Centos6安装shadowsocks及配置/" class="leancloud_visitors" data-flag-title="Centos6安装shadowsocks及配置">
+             <span id="/2018/10/23/Netty-心跳相关/" class="leancloud_visitors" data-flag-title="Netty 心跳相关(1)">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -401,31 +397,26 @@
       
 
       
-        <p>买下搬瓦工的服务器，很多人首先会希望配置多个端口方便使用，这时候就需要安装shadowsocks来解决。现在我来介绍一下Centos6系统下shadowsocks的安装及配置过程。<br><a id="more"></a></p>
-<p>这篇文章原是我在CSDN上发表的一篇博客，但在去年年底时莫名其妙被删除了，因此在这里，我把文章搬运过来，也是方便自己查看里面的一些命令。</p>
-<p><a href="https://www.bwgyhw.com/" target="_blank" rel="noopener">这是一个搬瓦工的购买教程网站</a></p>
-<h2 id="安装python、pip、shadowsocks"><a href="#安装python、pip、shadowsocks" class="headerlink" title="安装python、pip、shadowsocks"></a>安装python、pip、shadowsocks</h2><p>安装python：<br>    <code>yum install python-setuptools</code></p>
-<p>安装wget<br>    <code>yum install wget</code></p>
-<p>安装pip：（先下载再安装）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://pypi.python.org/packages/source/p/pip/pip-1.3.1.tar.gz --no-check-certificate</span><br><span class="line">tar -xzvf pip-1.3.1.tar.gz</span><br><span class="line">cd pip-1.3.1</span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure></p>
-<p>安装shadowsocks<br>    <code>pip install shadowsocks</code></p>
-<h2 id="配置shadowsocks"><a href="#配置shadowsocks" class="headerlink" title="配置shadowsocks"></a>配置shadowsocks</h2><p>首先创建配置文件/etc/shadowsocks.json<br>    <code>touch /etc/shadowsocks.json</code></p>
-<p>创建并编辑shadowsocks.json<br>    <code>vi /etc/shadowsocks.json</code></p>
-<p>现在要决定你是否需要开多端口，因为开出多个端口，每个端口的速度影响不大，但如果用同一个端口，速度会有所影响。 </p>
-<p>shadowsocks.json内容为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;server&quot;:&quot;你的IP地址&quot;,</span><br><span class="line">	&quot;local_address&quot;: &quot;127.0.0.1&quot;,</span><br><span class="line">	&quot;local_port&quot;:1080,</span><br><span class="line">	&quot;port_password&quot;:&#123;</span><br><span class="line">		&quot;端口号1&quot;:&quot;密码1&quot;,</span><br><span class="line">		&quot;端口号2&quot;:&quot;密码2&quot;</span><br><span class="line">	&#125;,</span><br><span class="line">	&quot;timeout&quot;:600,</span><br><span class="line">	&quot;method&quot;:&quot;rc4-md5&quot;,</span><br><span class="line">	&quot;fast_open&quot;: false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>对应你本地的shadowsocks配置为：<br><img src="https://github.com/death00/gitment-comments/blob/master/imgs/20171214113900502.png?raw=true" alt="本地shadowsocks配置"></p>
-<p>这时可以在Centos上运行shadowsocks服务：<br>    <code>ssserver -c /etc/shadowsocks.json -d start</code></p>
-<p>此时理论上你就可以科学上网了。</p>
-<p>停止shadowsocks服务命令：<br>    <code>ssserver -c /etc/shadowsocks.json -d stop</code></p>
-<h2 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h2><p>当你设置好配置文件并且启动之后，发现本地并不能上外网，其实可以通过shadowsocks的更新PAC功能查看是否可以连接外网：<br><img src="https://github.com/death00/gitment-comments/blob/master/imgs/20171214114951081.png?raw=true" alt="更新PAC功能"></p>
-<p>如果更新失败，则代表无法连接外网，这时候请看一下你的服务器上设置的端口是否开启：<br>    <code>netstat -ntlp</code></p>
-<p>我开启了443、7788、7789、7790四个端口，如果你发现此处没有你的端口号，代表端口未打开<br><img src="https://github.com/death00/gitment-comments/blob/master/imgs/20171214115347347.png?raw=true" alt="检查端口是否打开"></p>
-<p>此时你需要先关闭shadowsocks，使用关闭命令，然后打开你所需要的端口。</p>
-<p>利用iptables打开端口命令:<br>    <code>/sbin/iptables -I INPUT -p tcp --dport 端口号 -j ACCEPT</code></p>
-<p>保存你刚刚添加的规则:<br>    <code>/etc/rc.d/init.d/iptables save</code></p>
-<p>查看打开的端口：<br>    <code>/etc/init.d/iptables status</code></p>
-<p>现在这里会显示出你刚刚打开的端口。</p>
-<p>现在开启你服务器上的shadowsocks，再用查看端口命令，应该就显示出你的端口已经打开了。</p>
-<h2 id="资源下载"><a href="#资源下载" class="headerlink" title="资源下载"></a>资源下载</h2><p>shadowsocks相关下载包<br><a href="https://github.com/shadowsocks/shadowsocks-android/releases" target="_blank" rel="noopener">安卓版本官方下载</a><br><a href="https://github.com/death00/gitment-comments/blob/master/resources/shadowsocks-win-2.3.zip" target="_blank" rel="noopener">电脑版Windows 7及之前的版本</a><br><a href="https://github.com/death00/gitment-comments/blob/master/resources/shadowsocks-win-dotnet4.0-2.3.zip" target="_blank" rel="noopener">电脑版Windows 8及之后的版本</a><br><a href="https://github.com/shadowsocks/shadowsocks-iOS/wiki/Help" target="_blank" rel="noopener">iOS教程</a></p>
+        <p>无论是B/S还是C/S架构，如果你用的是长连接，那么心跳是必不可少的。Netty提供了对心跳机制的天然支持，今天结合例子特地学习了一下。<br><a id="more"></a></p>
+<p>首先，我们来设想一下何时需要发送心跳。假设你做的是一款棋牌类小游戏，那么当玩家登陆游戏后肯定是先进入大厅，再选择一张合适的桌子正式开始游戏。此时玩家的客户端与服务器建立的这一次session（会话）应该是长久保持着，如果服务器端保存着大量的session，那么整个服务器就会越来越卡，最终整个服务都会挂掉。</p>
+<p>为了预防这种情况，我们需要清理掉一些已经不用的或者理论上不会再用的session，比如：在手机上，如果我们在游戏中，突然接到一个电话或者退回桌面，这个时候我们的游戏客户端理论上就不会再主动向我们发送任何消息。这时候，心跳就派上用场了。</p>
+<p><strong>心跳，是为了证明自己还活着。</strong>因此，这里的心跳，说白了就是客户端向服务器端发送一次请求，服务器端相应，这样客户端就知道了服务器端是alive(活着的)；服务器端向客户端发送一次心跳，客户端相应，这样服务器端就知道了客户端是alive。</p>
+<p>知道了心跳的大致概念，那现在我们就需要知道Netty中是如何实现心跳，这就引出了两个类：<strong>IdleStateHandler</strong>、<strong>ChannelInboundHandlerAdapter</strong></p>
+<h2 id="IdleStateHandler"><a href="#IdleStateHandler" class="headerlink" title="IdleStateHandler"></a>IdleStateHandler</h2><h3 id="大致作用"><a href="#大致作用" class="headerlink" title="大致作用"></a>大致作用</h3><blockquote>
+<p>当连接的空闲时间（无论是读或者是写）太长时，都会触发IdleStateEvent事件。你可以写一个类继承ChannelInboundHandlerAdapter，重写userEventTriggered方法，来处理这类空闲事件。</p>
+</blockquote>
+<p>知道了其大致作用，那么接下来就看看我们到底该如何使用了。</p>
+<p>IdleStateHandler有3个构造方法，主要针对这4个属性，分别是：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">boolean</span> observeOutput;<span class="comment">// 是否考虑出站时较慢的情况。默认值是false（一般不考虑）。</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">long</span> readerIdleTimeNanos; <span class="comment">// 读事件空闲时间，0 代表禁用事件</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">long</span> writerIdleTimeNanos;<span class="comment">// 写事件空闲时间，0 代表禁用事件</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">long</span> allIdleTimeNanos; <span class="comment">//读或写空闲时间，0 代表禁用事件</span></span><br></pre></td></tr></table></figure></p>
+<p>上面的三个时间，默认是秒，你也可以在构造的时候指定。</p>
+<p>当你在pipeline中加入了该handler之后：</p>
+<pre><code>pipeline.addLast(new IdleStateHandler(30, 90, 0)); // 这个代表只考虑读空闲30秒或写空闲90秒的情况
+</code></pre><p>则会先调用<code>handlerAdded</code>方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handlerAdded</span><span class="params">(ChannelHandlerContext ctx)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (ctx.channel().isActive() &amp;&amp; ctx.channel().isRegistered()) &#123;</span><br><span class="line">        <span class="comment">// channelActive() event has been fired already, which means this.channelActive() will</span></span><br><span class="line">        <span class="comment">// not be invoked. We have to initialize here instead.</span></span><br><span class="line">        initialize(ctx);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// channelActive() event has not been fired yet.  this.channelActive() will be invoked</span></span><br><span class="line">        <span class="comment">// and initialization will occur there.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果channel正常，则调用<code>initialize</code>方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">byte</span> state; <span class="comment">// 0 - none, 1 - initialized, 2 - destroyed</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initialize</span><span class="params">(ChannelHandlerContext ctx)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Avoid the case where destroy() is called before scheduling timeouts.</span></span><br><span class="line">    <span class="comment">// See: https://github.com/netty/netty/issues/143</span></span><br><span class="line">    <span class="keyword">switch</span> (state) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>: <span class="comment">// 避免重复添加</span></span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>: <span class="comment">// 如果处于destoryed状态，则不需要添加</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    state = <span class="number">1</span>;</span><br><span class="line">    initOutputChanged(ctx);</span><br><span class="line"></span><br><span class="line">    lastReadTime = lastWriteTime = ticksInNanos();  <span class="comment">// 当前时间</span></span><br><span class="line">    <span class="comment">// 添加相应的定时调度任务</span></span><br><span class="line">    <span class="keyword">if</span> (readerIdleTimeNanos &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// readerIdleTimeNanos时间后，执行ReaderIdleTimeoutTask里面的方法</span></span><br><span class="line">        readerIdleTimeout = schedule(ctx, <span class="keyword">new</span> ReaderIdleTimeoutTask(ctx),</span><br><span class="line">                readerIdleTimeNanos, TimeUnit.NANOSECONDS);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (writerIdleTimeNanos &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        writerIdleTimeout = schedule(ctx, <span class="keyword">new</span> WriterIdleTimeoutTask(ctx),</span><br><span class="line">                writerIdleTimeNanos, TimeUnit.NANOSECONDS);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (allIdleTimeNanos &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        allIdleTimeout = schedule(ctx, <span class="keyword">new</span> AllIdleTimeoutTask(ctx),</span><br><span class="line">                allIdleTimeNanos, TimeUnit.NANOSECONDS);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>ReaderIdleTimeoutTask、WriterIdleTimeoutTask、AllIdleTimeoutTask</code>均继承自类<code>AbstractIdleTask</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">abstract</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractIdleTask</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ChannelHandlerContext ctx;</span><br><span class="line"></span><br><span class="line">    AbstractIdleTask(ChannelHandlerContext ctx) &#123;</span><br><span class="line">        <span class="keyword">this</span>.ctx = ctx;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!ctx.channel().isOpen()) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        run(ctx);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 子类需要实现的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(ChannelHandlerContext ctx)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以<code>ReaderIdleTimeoutTask</code>为例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">ReaderIdleTimeoutTask</span> <span class="keyword">extends</span> <span class="title">AbstractIdleTask</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    ReaderIdleTimeoutTask(ChannelHandlerContext ctx) &#123;</span><br><span class="line">        <span class="keyword">super</span>(ctx);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(ChannelHandlerContext ctx)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> nextDelay = readerIdleTimeNanos;</span><br><span class="line">        <span class="keyword">if</span> (!reading) &#123; <span class="comment">// 如果不在读(channelRead时会被置为true，cahnnelReadComplete时会被置为false)</span></span><br><span class="line">            nextDelay -= ticksInNanos() - lastReadTime;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (nextDelay &lt;= <span class="number">0</span>) &#123; <span class="comment">// 说明读空闲时间达到或超过预设时间</span></span><br><span class="line">            <span class="comment">// Reader is idle - set a new timeout and notify the callback.</span></span><br><span class="line">            readerIdleTimeout = schedule(ctx, <span class="keyword">this</span>, readerIdleTimeNanos, TimeUnit.NANOSECONDS);</span><br><span class="line">            <span class="comment">// firstReaderIdleEvent，是否是第一次读空闲事件(该标志位会在下一次channelRead触发时改成true，所以应该理解在一次读取完成后，这个读空闲事件是不是第一次)</span></span><br><span class="line">            <span class="keyword">boolean</span> first = firstReaderIdleEvent;</span><br><span class="line">            firstReaderIdleEvent = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// 生成一个IdleStateEvent对象</span></span><br><span class="line">                IdleStateEvent event = newIdleStateEvent(IdleState.READER_IDLE, first);</span><br><span class="line">                <span class="comment">// 找到下一个ChannelInboundHandler类（或其子类）的handler，触发其userEventTrigger(可以参考AbstractChannelHandlerContext的fireUserEventTriggered方法)</span></span><br><span class="line">                channelIdle(ctx, event);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">                ctx.fireExceptionCaught(t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// 要么正在读，要么读空闲时间小于预设时间</span></span><br><span class="line">            <span class="comment">// Read occurred before the timeout - set a new timeout with shorter delay.</span></span><br><span class="line">            readerIdleTimeout = schedule(ctx, <span class="keyword">this</span>, nextDelay, TimeUnit.NANOSECONDS);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>schedule</code>方法可以理解为将定时调度事件放进一个队列当中（我是在<code>AbstractScheduledEventExecutor</code>里找到的<code>scheduledTaskQueue().add(task);</code>，但这里面的代码我还没看明白，有兴趣的你可以自己研究，研究完后如果有空可在下方评论）。<br><code>channelIdle(ctx, event)</code>方法时找到下一个ChannelInboundHandler类（或其子类）的handler，因此你写的继承自ChannelInboundHandler的handler，一定要添加在<code>IdleStateHandler</code>的后面，比如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pipeline.addLast(<span class="keyword">new</span> IdleStateHandler(<span class="number">30</span>, <span class="number">90</span>, <span class="number">0</span>));</span><br><span class="line">pipeline.addLast(heartbeatHandler);</span><br></pre></td></tr></table></figure></p>
+<h2 id="ChannelInboundHandler"><a href="#ChannelInboundHandler" class="headerlink" title="ChannelInboundHandler"></a>ChannelInboundHandler</h2><p>它就很简单了，因为上面说了，channelIdle会调用ChannelInboundHandler的userEventTrigger，所以你只要自己写一个类继承ChannelInboundHandler，并重写它的userEventTrigger方法。比如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用Sharable是因为我的每一个pipeline中用的都是同样的handler</span></span><br><span class="line"><span class="meta">@Sharable</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NettyHeartbeatHandler</span> <span class="keyword">extends</span> <span class="title">ChannelInboundHandlerAdapter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> IHeartbeatFactory factory;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">NettyHeartbeatHandler</span><span class="params">(IHeartbeatFactory factory)</span> </span>&#123;</span><br><span class="line">    Preconditions.checkNotNull(factory);</span><br><span class="line">    <span class="keyword">this</span>.factory = factory;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">userEventTriggered</span><span class="params">(ChannelHandlerContext ctx, Object evt)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!(evt <span class="keyword">instanceof</span> IdleStateEvent)) &#123;</span><br><span class="line">      <span class="keyword">super</span>.userEventTriggered(ctx, evt);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    IdleStateEvent event = (IdleStateEvent) evt;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (event.state() == IdleState.READER_IDLE) &#123; <span class="comment">// 如果是读空闲，则关闭当前会话</span></span><br><span class="line">      ctx.close(); <span class="comment">// 此时会触发下一个ChannelOutboundHandler的close方法，你可以在自己写的handler中进行断线操作</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (event.state() == IdleState.WRITER_IDLE) &#123; </span><br><span class="line">      <span class="comment">// 如果是写空闲，则向客户端发送心跳请求包，如果客户端不返回心跳相应包，则说明客户端断线，下一次就将触发读空闲事件。这也是为了向客户端证明服务器端alive</span></span><br><span class="line">      ctx.writeAndFlush(</span><br><span class="line">          <span class="keyword">new</span> BinaryWebSocketFrame(</span><br><span class="line">              Unpooled.copiedBuffer(factory.getHeartbeatRequest().toByteArray())</span><br><span class="line">          )</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>因此，以上就是关于用Netty实现心跳的简单介绍。其中带大家重点看了服务器端应该在什么情况下发起一次心跳请求，应该是长久没有收到消息时（可能是有业务含义的消息或者是一个心跳包）。如果大家有什么想法可以在下方评论。</p>
 
       
     </div>
@@ -467,9 +458,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/linux/" rel="tag"># linux</a>
-          
-            <a href="/tags/shadowsocks/" rel="tag"># shadowsocks</a>
+            <a href="/tags/Java/" rel="tag"># Java</a>
           
         </div>
       
@@ -482,8 +471,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/29/初章/" rel="next" title="初章">
-                <i class="fa fa-chevron-left"></i> 初章
+              <a href="/2018/09/30/gitalk Error Validation Failed/" rel="next" title="gitalk Error: Validation Failed">
+                <i class="fa fa-chevron-left"></i> gitalk Error: Validation Failed
               </a>
             
           </div>
@@ -491,10 +480,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/30/gitalk Error Validation Failed/" rel="prev" title="gitalk Error: Validation Failed">
-                gitalk Error: Validation Failed <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -645,7 +630,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装python、pip、shadowsocks"><span class="nav-number">1.</span> <span class="nav-text">安装python、pip、shadowsocks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置shadowsocks"><span class="nav-number">2.</span> <span class="nav-text">配置shadowsocks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可能遇到的问题"><span class="nav-number">3.</span> <span class="nav-text">可能遇到的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资源下载"><span class="nav-number">4.</span> <span class="nav-text">资源下载</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#IdleStateHandler"><span class="nav-number">1.</span> <span class="nav-text">IdleStateHandler</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#大致作用"><span class="nav-number">1.1.</span> <span class="nav-text">大致作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ChannelInboundHandler"><span class="nav-number">2.</span> <span class="nav-text">ChannelInboundHandler</span></a></li></ol></div>
             
 
           </div>
