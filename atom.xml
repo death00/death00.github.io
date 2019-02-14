@@ -32,9 +32,9 @@
     </summary>
     
     
-      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
-    
       <category term="Disruptor" scheme="http://yoursite.com/tags/Disruptor/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
       <category term="缓存行" scheme="http://yoursite.com/tags/%E7%BC%93%E5%AD%98%E8%A1%8C/"/>
     
@@ -58,9 +58,9 @@
     </summary>
     
     
-      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
-    
       <category term="Disruptor" scheme="http://yoursite.com/tags/Disruptor/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
   </entry>
   
