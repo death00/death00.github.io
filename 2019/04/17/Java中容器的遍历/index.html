@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Java," />
 
 
 
@@ -81,16 +81,18 @@
 
 
 
-<meta name="description" content="all or nothing, now or never.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="death00">
-<meta property="og:url" content="http://yoursite.com/tags/log4j/index.html">
+<meta name="description" content="当我们用增强for循环遍历非并发容器（HashMap、ArrayList等），如果修改其结构，会抛出异常ConcurrentModificationException，因此在阿里巴巴的Java规范中有说到：不要在foreach循环里进行元素的remove/add操作，remove元素请使用Iterator方式。，但是不是真的就不可以在增强for循环中修改结构吗？其原理又是什么呢？">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java中容器的遍历">
+<meta property="og:url" content="http://yoursite.com/2019/04/17/Java中容器的遍历/index.html">
 <meta property="og:site_name" content="death00">
-<meta property="og:description" content="all or nothing, now or never.">
+<meta property="og:description" content="当我们用增强for循环遍历非并发容器（HashMap、ArrayList等），如果修改其结构，会抛出异常ConcurrentModificationException，因此在阿里巴巴的Java规范中有说到：不要在foreach循环里进行元素的remove/add操作，remove元素请使用Iterator方式。，但是不是真的就不可以在增强for循环中修改结构吗？其原理又是什么呢？">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-18T02:02:23.594Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="death00">
-<meta name="twitter:description" content="all or nothing, now or never.">
+<meta name="twitter:title" content="Java中容器的遍历">
+<meta name="twitter:description" content="当我们用增强for循环遍历非并发容器（HashMap、ArrayList等），如果修改其结构，会抛出异常ConcurrentModificationException，因此在阿里巴巴的Java规范中有说到：不要在foreach循环里进行元素的remove/add操作，remove元素请使用Iterator方式。，但是不是真的就不可以在增强for循环中修改结构吗？其原理又是什么呢？">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/log4j/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/04/17/Java中容器的遍历/"/>
 
 
 
 
 
-  <title>标签: log4j | death00</title>
+  <title>Java中容器的遍历 | death00</title>
   
 
 
@@ -164,7 +166,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -292,54 +294,236 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>log4j<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/17/Java中容器的遍历/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="death00">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="death00">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/10/24/log4j日志不输出的问题/" itemprop="url">
-              
-                <span itemprop="name">log4j日志不输出的问题</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Java中容器的遍历</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-10-24T17:03:10+08:00"
-              content="2018-10-24" >
-          10-24
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-17T18:44:42+08:00">
+                2019-04-17
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/04/17/Java中容器的遍历/" class="leancloud_visitors" data-flag-title="Java中容器的遍历">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>当我们用增强for循环遍历非并发容器（HashMap、ArrayList等），如果修改其结构，会抛出异常<code>ConcurrentModificationException</code>，因此在阿里巴巴的Java规范中有说到：<code>不要在foreach循环里进行元素的remove/add操作，remove元素请使用Iterator方式。</code>，但是不是真的就不可以在增强for循环中修改结构吗？其原理又是什么呢？<br><a id="more"></a></p>
+<h2 id="ConcurrentModificationException的含义"><a href="#ConcurrentModificationException的含义" class="headerlink" title="ConcurrentModificationException的含义"></a>ConcurrentModificationException的含义</h2><p><code>ConcurrentModificationException</code>可以将其通俗的翻译为<code>并发修改异常</code>，那么关注点就在<code>并发</code>和<code>修改</code>了。也许有些人会说，我只是在单线程中修改了，并没有并发操作，但系统也抛了这样的这样的错误，这是为什么呢？别急，我们看看它的源码解释：</p>
+<blockquote>
+<p>This exception may be thrown by methods that have detected concurrent modification of an object when such modification is not permissible.</p>
+</blockquote>
+<p>这个异常就是应用程序在做一些系统不允许的操作时抛出的。记住，只要是系统不允许的操作，就一定会抛错的。</p>
+<p>后面有一个值得注意的地方</p>
+<blockquote>
+<p>Note that fail-fast behavior cannot be guaranteed as it is, generally speaking, impossible to make any hard guarantees in the presence of unsynchronized concurrent modification. Fail-fast operations throw ConcurrentModificationException on a best-effort basis. Therefore, it would be wrong to write a program that depended on this exception for its correctness: ConcurrentModificationException should be used only to detect bugs.</p>
+</blockquote>
+<p><code>fail-fast</code>（快速失败）并不能一定被保证，所以<code>fail-fast</code>操作会尽最大努力抛出该异常。既然是尽最大努力，因此无论是不是并发操作，只要是修改了，就一定会报错。</p>
+<p>既然如此，我们来看看for循环中遍历修改容器结构，系统是如何知道的。</p>
+<h2 id="增加for循环的原理"><a href="#增加for循环的原理" class="headerlink" title="增加for循环的原理"></a>增加for循环的原理</h2><p>我们来看看增强for循环遍历修改HashMap的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, String&gt; hashMap = new HashMap&lt;&gt;(10);</span><br><span class="line">// 添加</span><br><span class="line">for (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">  hashMap.put(&quot;key&quot; + i, &quot;value&quot; + i);</span><br><span class="line">&#125;</span><br><span class="line">// 遍历修改</span><br><span class="line">for (Entry&lt;String, String&gt; entry : hashMap.entrySet()) &#123;</span><br><span class="line">  String key = entry.getKey();</span><br><span class="line">  hashMap.remove(key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个时候，你如果运行的话，就会抛出<code>ConcurrentModificationException</code>，这个时候我们需要具体调试一下，发现遍历第一次并删除时没有报错，但第二次遍历，在for循环的括号执行完后，就抛出了异常，这又是为什么呢？</p>
+<p>让我们反编译一下class文件，看看究竟增强for循环做了什么：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, String&gt; hashMap = new HashMap(10);</span><br><span class="line"></span><br><span class="line">for(int i = 0; i &lt; 10; ++i) &#123;</span><br><span class="line">  hashMap.put(&quot;key&quot; + i, &quot;value&quot; + i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Iterator var5 = hashMap.entrySet().iterator();</span><br><span class="line">while(var5.hasNext()) &#123;</span><br><span class="line">  Entry&lt;String, String&gt; entry = (Entry)var5.next();</span><br><span class="line">  String key = (String)entry.getKey();</span><br><span class="line">  hashMap.remove(key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们发现，虽然写法上是增强for循环，但实际还是使用的<code>while</code>结合<code>iterator</code>进行遍历，现在我们贴上这个代码进行调试。</p>
+<p>发现在第二次<code>var5.next()</code>处抛异常，接下来我们看看<code>next</code>方法究竟做了什么？</p>
+<p>在<code>HashMap</code>的源码中显示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">final class EntryIterator extends HashIterator</span><br><span class="line">    implements Iterator&lt;Map.Entry&lt;K,V&gt;&gt; &#123;</span><br><span class="line">    public final Map.Entry&lt;K,V&gt; next() &#123; return nextNode(); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">final Node&lt;K,V&gt; nextNode() &#123;</span><br><span class="line">    Node&lt;K,V&gt;[] t;</span><br><span class="line">    Node&lt;K,V&gt; e = next;</span><br><span class="line">    if (modCount != expectedModCount)</span><br><span class="line">        throw new ConcurrentModificationException();</span><br><span class="line">    if (e == null)</span><br><span class="line">        throw new NoSuchElementException();</span><br><span class="line">    if ((next = (current = e).next) == null &amp;&amp; (t = table) != null) &#123;</span><br><span class="line">        do &#123;&#125; while (index &lt; t.length &amp;&amp; (next = t[index++]) == null);</span><br><span class="line">    &#125;</span><br><span class="line">    return e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们注意到，<code>nextNode()</code>方法的第一个判断就决定了是否抛出<code>ConcurrentModificationException</code>，那么<code>modCount</code>和<code>expectedModCount</code>究竟是什么呢？</p>
+<h2 id="modCount和expectedModCount"><a href="#modCount和expectedModCount" class="headerlink" title="modCount和expectedModCount"></a>modCount和expectedModCount</h2><p>我们来看看<code>modCount</code>和<code>expectedModCount</code>的关系，当我们调用<code>Iterator var5 = hashMap.entrySet().iterator();</code>时，源代码做了什么：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HashIterator() &#123;</span><br><span class="line">    expectedModCount = modCount;</span><br><span class="line">    Node&lt;K,V&gt;[] t = table;</span><br><span class="line">    current = next = null;</span><br><span class="line">    index = 0;</span><br><span class="line">    if (t != null &amp;&amp; size &gt; 0) &#123; // advance to first entry</span><br><span class="line">        do &#123;&#125; while (index &lt; t.length &amp;&amp; (next = t[index++]) == null);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在一开始，就让<code>expectedModCount</code>等于<code>modCount</code>，而当我们调用<code>hashMap.remove(key);</code>时，实际上修改了<code>modCount</code>的值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,</span><br><span class="line">                           boolean matchValue, boolean movable) &#123;</span><br><span class="line">    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, index;</span><br><span class="line">    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;</span><br><span class="line">        (p = tab[index = (n - 1) &amp; hash]) != null) &#123;</span><br><span class="line">        Node&lt;K,V&gt; node = null, e; K k; V v;</span><br><span class="line">        if (p.hash == hash &amp;&amp;</span><br><span class="line">            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">            node = p;</span><br><span class="line">        else if ((e = p.next) != null) &#123;</span><br><span class="line">            if (p instanceof TreeNode)</span><br><span class="line">                node = ((TreeNode&lt;K,V&gt;)p).getTreeNode(hash, key);</span><br><span class="line">            else &#123;</span><br><span class="line">                do &#123;</span><br><span class="line">                    if (e.hash == hash &amp;&amp;</span><br><span class="line">                        ((k = e.key) == key ||</span><br><span class="line">                         (key != null &amp;&amp; key.equals(k)))) &#123;</span><br><span class="line">                        node = e;</span><br><span class="line">                        break;</span><br><span class="line">                    &#125;</span><br><span class="line">                    p = e;</span><br><span class="line">                &#125; while ((e = e.next) != null);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (node != null &amp;&amp; (!matchValue || (v = node.value) == value ||</span><br><span class="line">                             (value != null &amp;&amp; value.equals(v)))) &#123;</span><br><span class="line">            if (node instanceof TreeNode)</span><br><span class="line">                ((TreeNode&lt;K,V&gt;)node).removeTreeNode(this, tab, movable);</span><br><span class="line">            else if (node == p)</span><br><span class="line">                tab[index] = node.next;</span><br><span class="line">            else</span><br><span class="line">                p.next = node.next;</span><br><span class="line">            ++modCount;</span><br><span class="line">            --size;</span><br><span class="line">            afterNodeRemoval(node);</span><br><span class="line">            return node;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>modCount</code>增大1，那么，当我们下一次调用<code>var5.next()</code>时，自然就发现<code>modCount</code>和<code>expectedModCount</code>不等了。</p>
+<h2 id="修改结构的正确姿势"><a href="#修改结构的正确姿势" class="headerlink" title="修改结构的正确姿势"></a>修改结构的正确姿势</h2><p>使用<code>增强for循环</code>，本质还是在使用<code>iterator</code>，那为什么大家都在推介使用<code>iterator.remove()</code>呢？让我们看看源代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public final void remove() &#123;</span><br><span class="line">    Node&lt;K,V&gt; p = current;</span><br><span class="line">    if (p == null)</span><br><span class="line">        throw new IllegalStateException();</span><br><span class="line">    if (modCount != expectedModCount)</span><br><span class="line">        throw new ConcurrentModificationException();</span><br><span class="line">    current = null;</span><br><span class="line">    K key = p.key;</span><br><span class="line">    removeNode(hash(key), key, null, false, false);</span><br><span class="line">    expectedModCount = modCount;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们发现，这个remove方法虽然也调用了<code>removeNode</code>，但它在最后一步再次将<code>modCount</code>的值赋给<code>expectedModCount</code>，因此保证了下一次调用<code>next()</code>方法是不抛错。</p>
+<p>所以，我们要么就直接显示地使用<code>iterator</code>，用它的<code>remove</code>方法移除对象。如果你实在想用<code>增强for循环</code>遍历删除，那么也只能在删除一个后，立刻退出循环。但无论用哪种方法，当多个线程同时修改时，都会有出错的可能性，因为你即时保证单个线程内的<code>modCount</code>和<code>expectedModCount</code>，但这个操作并不能保证原子性。</p>
+<p>因此，如果在多线程环境下，我更推介使用<code>ConcurrentHashMap</code>，因为它没有<code>modCount</code>和<code>expectedModCount</code>的概念，因此，即时你是使用<code>增强for循环</code>遍历删除，也不会出现问题。</p>
 
       
     </div>
+    
+    
+    
 
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="death00 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果您感觉文章不错，也愿意支持一下作者的话</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://github.com/death00/gitment-comments/blob/master/imgs/wechatpay.jpg?raw=true" alt="death00 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/09/DDL-事务的一种实现/" rel="next" title="DDL-事务的一种实现">
+                <i class="fa fa-chevron-left"></i> DDL-事务的一种实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -347,6 +531,13 @@
 
 
           
+
+  
+    <div id="gitalk-container"></div>
+
+  
+
+
 
         </div>
         
@@ -367,8 +558,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -444,6 +644,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ConcurrentModificationException的含义"><span class="nav-number">1.</span> <span class="nav-text">ConcurrentModificationException的含义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加for循环的原理"><span class="nav-number">2.</span> <span class="nav-text">增加for循环的原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#modCount和expectedModCount"><span class="nav-number">3.</span> <span class="nav-text">modCount和expectedModCount</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改结构的正确姿势"><span class="nav-number">4.</span> <span class="nav-text">修改结构的正确姿势</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -578,6 +794,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -618,6 +838,22 @@
 
 
 
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/src/md5.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'cdd22c7b695e669f49e1',
+          clientSecret: '9a5fbb28c437389a2505a531eb66e81f0d50fba5',
+          repo: 'gitment-comments',
+          owner: 'death00',
+          admin: ['death00'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
 
 
   

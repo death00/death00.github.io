@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="事务,MongoDB," />
 
 
 
@@ -81,16 +81,18 @@
 
 
 
-<meta name="description" content="all or nothing, now or never.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="death00">
-<meta property="og:url" content="http://yoursite.com/tags/log4j/index.html">
+<meta name="description" content="上次曾和大家说过DDL-脏数据层的实现，当时的我以为使用它的最大好处就是减少IO操作。但最近在项目中使用时，发现它也可以作为事务的一种临时实现。">
+<meta name="keywords" content="事务,MongoDB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DDL-事务的一种实现">
+<meta property="og:url" content="http://yoursite.com/2019/03/09/DDL-事务的一种实现/index.html">
 <meta property="og:site_name" content="death00">
-<meta property="og:description" content="all or nothing, now or never.">
+<meta property="og:description" content="上次曾和大家说过DDL-脏数据层的实现，当时的我以为使用它的最大好处就是减少IO操作。但最近在项目中使用时，发现它也可以作为事务的一种临时实现。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-17T10:41:34.799Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="death00">
-<meta name="twitter:description" content="all or nothing, now or never.">
+<meta name="twitter:title" content="DDL-事务的一种实现">
+<meta name="twitter:description" content="上次曾和大家说过DDL-脏数据层的实现，当时的我以为使用它的最大好处就是减少IO操作。但最近在项目中使用时，发现它也可以作为事务的一种临时实现。">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/log4j/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/03/09/DDL-事务的一种实现/"/>
 
 
 
 
 
-  <title>标签: log4j | death00</title>
+  <title>DDL-事务的一种实现 | death00</title>
   
 
 
@@ -164,7 +166,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -292,54 +294,243 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>log4j<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/09/DDL-事务的一种实现/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="death00">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="death00">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/10/24/log4j日志不输出的问题/" itemprop="url">
-              
-                <span itemprop="name">log4j日志不输出的问题</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">DDL-事务的一种实现</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-10-24T17:03:10+08:00"
-              content="2018-10-24" >
-          10-24
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-09T14:07:18+08:00">
+                2019-03-09
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DDL/" itemprop="url" rel="index">
+                    <span itemprop="name">DDL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/03/09/DDL-事务的一种实现/" class="leancloud_visitors" data-flag-title="DDL-事务的一种实现">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>上次曾和大家说过<a href="https://death00.github.io/2018/10/31/DDL-%E8%84%8F%E6%95%B0%E6%8D%AE%E5%B1%82%E7%9A%84%E5%AE%9E%E7%8E%B0/#more" target="_blank" rel="noopener">DDL-脏数据层的实现</a>，当时的我以为使用它的最大好处就是减少IO操作。但最近在项目中使用时，发现它也可以作为事务的一种临时实现。<br><a id="more"></a></p>
+<p>大家知道，在Mongodb4.0之前是不支持事务的。因此，如果你的MongoDB使用的是低于4.0的版本，那么你一般都是在业务层去弥补，而这个DDL也可以做这样的事。</p>
+<p>DDL中，业务场景一般是一个请求过来，直接修改缓存中的数据，我们默认这一步是成功的。后台会有一个专门的线程去定期扫描所有的脏数据，如果脏数据有<code>脏字段</code>，那么就将脏数据入库，入库成功自然便是皆大欢喜了，但如果不成功呢？</p>
+<p>记得当时用MySql数据库，项目用的Spring boot + MyBatis，利用<code>@Transactional</code>注解，将几个数据库操作放在一个方法，这样即便出错，也可以自动回退。</p>
+<p>但现在我们用的是MongoDB，而且我现在的版本是3.2（坑爹的阿里云服务）。数据库本身就不支持事务，这样我的DDL在将脏数据刷入数据库时，如果抛错，那么我的缓存里依旧是正确的数据，我只需要继续记录这些没有成功刷入数据库的脏数据字段，那么缓存里的数据，就依旧是刷入数据库之前的状态。而当后续请求进来后，其访问到的，也还是缓存里的正确数据。你只需要在抛错处设置报警，这样就可以即时知道问题，此时只需要专心修改这些问题，这样脏数据就会在线程下一次运行中，将数据刷入数据库中。</p>
 
       
     </div>
+    
+    
+    
 
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="death00 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果您感觉文章不错，也愿意支持一下作者的话</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://github.com/death00/gitment-comments/blob/master/imgs/wechatpay.jpg?raw=true" alt="death00 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/事务/" rel="tag"># 事务</a>
+          
+            <a href="/tags/MongoDB/" rel="tag"># MongoDB</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/14/Disruptor原理探讨/" rel="next" title="Disruptor原理探讨">
+                <i class="fa fa-chevron-left"></i> Disruptor原理探讨
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/17/Java中容器的遍历/" rel="prev" title="Java中容器的遍历">
+                Java中容器的遍历 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -347,6 +538,13 @@
 
 
           
+
+  
+    <div id="gitalk-container"></div>
+
+  
+
+
 
         </div>
         
@@ -578,6 +776,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -618,6 +820,22 @@
 
 
 
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/src/md5.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'cdd22c7b695e669f49e1',
+          clientSecret: '9a5fbb28c437389a2505a531eb66e81f0d50fba5',
+          repo: 'gitment-comments',
+          owner: 'death00',
+          admin: ['death00'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
 
 
   
