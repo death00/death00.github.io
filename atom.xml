@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-05-11T03:08:04.983Z</updated>
+  <updated>2019-06-06T08:48:58.987Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nginx报错111: Connection refused</title>
+    <link href="http://yoursite.com/2019/06/06/nginx%E6%8A%A5%E9%94%99111-Connection-refused/"/>
+    <id>http://yoursite.com/2019/06/06/nginx报错111-Connection-refused/</id>
+    <published>2019-06-06T04:22:41.000Z</published>
+    <updated>2019-06-06T08:48:58.987Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近遇到了nginx疯狂抛错，access.log一天一共5W多条，但error.log中有大概9K多条，基本都是<code>111: Connection refused</code>，这到底是为什么呢？<br><a id="more"></a></p><h2 id="从日志看起"><a href="#从日志看起" class="headerlink" title="从日志看起"></a>从日志看起</h2><p>我们还是先来看日志。我提取了一条error.log当中抛错的日志(稍微分一下行，否则实在太长，敏感信息稍微处理了一下):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2019/06/06 10:09:45 [error] 28652#0: *883239 connect() failed (111: Connection refused) while connecting to upstream, </span><br><span class="line">client: 124.104.90.145, server: xxx.xxxxx.com, request: &quot;POST /test-service/upload?mcachenum=155978698 HTTP/1.1&quot;, </span><br><span class="line">upstream: &quot;http://[::1]:17000/test-service/upload?mcachenum=155978698&quot;, host: &quot;xxx.xxxxx.com&quot;, </span><br><span class="line">referrer: &quot;https://servicewechat.com/x98b46f69/2/page-frame.html&quot;</span><br></pre></td></tr></table></figure></p><p>看了一下前面的报错和后面的描述，第一眼看上去感觉都是正常。但再看之后发现，<code>upstream</code>中的host有些不一样。<code>[::1]</code>，这实际是一个IPv6的地址。</p><p>这时候你可以查看一下你的机器是否开启了IPv6的地址，linux的命令是：<code>ip address</code>，看看返回结果中是否出现了<code>inet6</code>，如果有，那么恭喜你，原因找到了。</p><h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>解决方法有两种，一个是禁用你机器的IPv6配置，另一个则是修改nginx.conf中的配置。</p><p>个人觉得后一个方法更加保险一些，因为这不涉及到你的机器配置，应该相对而言最少。</p><p>nginx.conf的修改，则是针对<code>server</code>模块中的<code>location</code>，修改<code>proxy_pass</code>中的host，我们在网上经常看到别人用的是：</p><p><code>proxy_pass http://localhost:18000/test-service/;</code></p><p>但为了强制指定IPv4的地址，需要变成：</p><p><code>proxy_pass http://127.0.0.1:18000/test-service/;</code></p><p>这样操作之后，再观察nginx的error.log，应该就不会再报upstream里含有IPv6地址的错误了。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上就是我这次错误的整个过程，虽然整个过程不长，但确实让我知道了，作为一个后端开发，我的知识面还是太窄了。而且Bing也是真的好用，最近无法翻墙了，暂时用Bing代替，感觉还是不错的。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近遇到了nginx疯狂抛错，access.log一天一共5W多条，但error.log中有大概9K多条，基本都是&lt;code&gt;111: Connection refused&lt;/code&gt;，这到底是为什么呢？&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="nginx" scheme="http://yoursite.com/tags/nginx/"/>
+    
+      <category term="[object Object]" scheme="http://yoursite.com/tags/object-Object/"/>
+    
+      <category term="upstream" scheme="http://yoursite.com/tags/upstream/"/>
+    
+      <category term="IPv6" scheme="http://yoursite.com/tags/IPv6/"/>
+    
+  </entry>
   
   <entry>
     <title>力扣-65不同路径</title>
