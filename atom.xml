@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-09-25T07:25:57.555Z</updated>
+  <updated>2019-09-26T06:45:37.453Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>github博客Hexo引流到微信</title>
+    <link href="http://yoursite.com/2019/09/26/github%E5%8D%9A%E5%AE%A2hexo%E5%BC%95%E6%B5%81%E5%88%B0%E5%BE%AE%E4%BF%A1/"/>
+    <id>http://yoursite.com/2019/09/26/github博客hexo引流到微信/</id>
+    <published>2019-09-26T05:31:59.000Z</published>
+    <updated>2019-09-26T06:45:37.453Z</updated>
+    
+    <content type="html"><![CDATA[<p>相信有不少小伙伴都在github上创建了属于自己的博客，其中用<code>Hexo</code>的<code>Next</code>主题应该不少，那么，我们究竟该如何将博客的流量引流到微信呢？今天就来带你看一看。<br><a id="more"></a></p><h2 id="如何引流"><a href="#如何引流" class="headerlink" title="如何引流"></a>如何引流</h2><p>现在网上有一种套路，当你在看别人博客时，只能看一半，想继续看的话，需要扫码关注别人的公众号才能继续，这样的话，你的公众号粉丝自然就能蹭蹭上涨。</p><p>这里需要解决两个问题：</p><ol><li>文章看到一半就不允许继续观看</li><li>关注你的公众号后才能继续观看</li></ol><p>这里我是借助了<a href="https://openwrite.cn/" target="_blank" rel="noopener">OpenWrite</a>中的引流工具实现的。</p><h2 id="导流"><a href="#导流" class="headerlink" title="导流"></a>导流</h2><p>当你注册进入OpenWrite后，会有一个<code>博客导流公众号</code>功能，添加完相应的信息后，即可获得一段具有隐藏功能的<code>JS代码</code>：</p><p><img src="https://openwrite.cn/wp-content/uploads/2019/09/WeChat7c77e13e57068b5f402ad850e144e03d.png" alt=""></p><h2 id="如何设置文章看到一半"><a href="#如何设置文章看到一半" class="headerlink" title="如何设置文章看到一半"></a>如何设置文章看到一半</h2><p>这就需要我们在文章模块页面增加相应的隐藏功能，并且能够展示二维码并锁住页面。</p><h3 id="增加自定义swig文件"><a href="#增加自定义swig文件" class="headerlink" title="增加自定义swig文件"></a>增加自定义swig文件</h3><p>进入你的博客文件夹，在<code>themes\next\layout\_custom</code>文件夹中，新建一个<code>hide.swig</code>文件（这个文件夹专门用来存放自定义的一些代码），复制上文提到的JS代码，注意<code>id</code>的值，它默认用的是<code>container</code>，我设置成了<code>container-1</code>。</p><h3 id="修改文章模板文件"><a href="#修改文章模板文件" class="headerlink" title="修改文章模板文件"></a>修改文章模板文件</h3><p>进入你的博客文件夹，在<code>themes\next\layout</code>文件夹中，会有一个<code>_layout.swig</code>文件，这就是你的文章模板文件。其中有一段内容是：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;main id=<span class="string">"main"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"main"</span>&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"main-inner"</span>&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"content-wrap"</span>&gt;</span><br><span class="line">        &lt;div id=<span class="string">"content"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"content"</span>&gt;</span><br><span class="line">          &#123;% block content %&#125;&#123;% endblock %&#125;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure><p><code>id</code>为<code>content</code>的地方，就是你的文章内容，这时候你可以在外面再嵌套一层<code>div</code>，其<code>id</code>就是上面我设置的<code>container-1</code>：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;main id=<span class="string">"main"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"main"</span>&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"main-inner"</span>&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"content-wrap"</span>&gt;</span><br><span class="line">      &lt;div id=<span class="string">"container-1"</span>&gt;</span><br><span class="line">        &lt;div id=<span class="string">"content"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"content"</span>&gt;</span><br><span class="line">          &#123;% block content %&#125;&#123;% endblock %&#125;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br></pre></td></tr></table></figure><p>此时就可以发布你的博客，现在你的文章就会产生<code>阅读全文</code>的按钮了：</p><p><img src="https://i.loli.net/2019/09/25/YLjIcqtPlpvwCaZ.png" alt=""></p><p>按下这个按钮，就会弹出相应的二维码和你当初设置的关键字：</p><p><img src="https://raw.githubusercontent.com/death00/gitment-comments/master/imgs/2019092601.png" alt=""></p><h2 id="微信公众号自动回复设置"><a href="#微信公众号自动回复设置" class="headerlink" title="微信公众号自动回复设置"></a>微信公众号自动回复设置</h2><p>在微信公众号后台页面，选择<code>自动回复</code>-<code>关键词回复</code>，点击<code>添加回复</code>：</p><p><img src="https://raw.githubusercontent.com/death00/gitment-comments/master/imgs/2019092602.png" alt=""></p><p>填写<code>规则名称</code>、<code>关键词</code>(你当初在OpenWrite中设置的)，<code>回复内容</code>选择<code>文字</code>，填上<code>OpenWrite</code>中返回的那段文字。</p><p><img src="https://raw.githubusercontent.com/death00/gitment-comments/master/imgs/2019092603.png" alt=""></p><p>此时，当别人关注你的公众号并输入关键字后(比如我设置的关键字就是git)，就会显示回复了</p><p><img src="https://raw.githubusercontent.com/death00/gitment-comments/master/imgs/2019092604.png" alt=""></p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果你的博客有一定的日活，那就千万不要错过这种微信涨粉、互相引流的机会。如果大家有什么疑问，欢迎在下方留言。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;相信有不少小伙伴都在github上创建了属于自己的博客，其中用&lt;code&gt;Hexo&lt;/code&gt;的&lt;code&gt;Next&lt;/code&gt;主题应该不少，那么，我们究竟该如何将博客的流量引流到微信呢？今天就来带你看一看。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="github" scheme="http://yoursite.com/tags/github/"/>
+    
+      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+    
+      <category term="Next" scheme="http://yoursite.com/tags/Next/"/>
+    
+      <category term="微信" scheme="http://yoursite.com/tags/%E5%BE%AE%E4%BF%A1/"/>
+    
+  </entry>
   
   <entry>
     <title>Java中的interrupt</title>
