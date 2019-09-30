@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Nginx,负载均衡," />
 
 
 
@@ -81,16 +81,23 @@
 
 
 
-<meta name="description" content="all or nothing, now or never.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="death00">
-<meta property="og:url" content="http://yoursite.com/tags/MongoDB/index.html">
+<meta name="description" content="我们都知道，Nginx支持负载均衡，可以很方便的帮助我们进行水平扩容，然而它究竟是依据什么原则进行请求的分发，其中又有哪些负载均衡算法可供选择和配置，今天就让我们好好来了解一下。">
+<meta name="keywords" content="Nginx,负载均衡">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx的负载均衡">
+<meta property="og:url" content="http://yoursite.com/2019/09/30/Nginx的负载均衡/index.html">
 <meta property="og:site_name" content="death00">
-<meta property="og:description" content="all or nothing, now or never.">
+<meta property="og:description" content="我们都知道，Nginx支持负载均衡，可以很方便的帮助我们进行水平扩容，然而它究竟是依据什么原则进行请求的分发，其中又有哪些负载均衡算法可供选择和配置，今天就让我们好好来了解一下。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/death00/gitment-comments/blob/master/imgs/2019093001.png?raw=true">
+<meta property="og:image" content="https://github.com/death00/gitment-comments/blob/master/imgs/2019093002.png?raw=true">
+<meta property="og:image" content="https://raw.githubusercontent.com/death00/gitment-comments/master/mark/attentionQrcode.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/death00/gitment-comments/master/mark/toutiaoAttentionQrcode.jpeg">
+<meta property="og:updated_time" content="2019-09-30T03:05:18.592Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="death00">
-<meta name="twitter:description" content="all or nothing, now or never.">
+<meta name="twitter:title" content="Nginx的负载均衡">
+<meta name="twitter:description" content="我们都知道，Nginx支持负载均衡，可以很方便的帮助我们进行水平扩容，然而它究竟是依据什么原则进行请求的分发，其中又有哪些负载均衡算法可供选择和配置，今天就让我们好好来了解一下。">
+<meta name="twitter:image" content="https://github.com/death00/gitment-comments/blob/master/imgs/2019093001.png?raw=true">
 
 
 
@@ -120,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/MongoDB/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/09/30/Nginx的负载均衡/"/>
 
 
 
 
 
-  <title>标签: MongoDB | death00</title>
+  <title>Nginx的负载均衡 | death00</title>
   
 
 
@@ -171,7 +178,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -306,54 +313,310 @@
             <div id="content" class="content">
               
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>MongoDB<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/30/Nginx的负载均衡/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="death00">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="death00">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/03/09/DDL-事务的一种实现/" itemprop="url">
-              
-                <span itemprop="name">DDL-事务的一种实现</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Nginx的负载均衡</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-09T14:07:18+08:00"
-              content="2019-03-09" >
-          03-09
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-30T09:34:06+08:00">
+                2019-09-30
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/09/30/Nginx的负载均衡/" class="leancloud_visitors" data-flag-title="Nginx的负载均衡">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我们都知道，Nginx支持负载均衡，可以很方便的帮助我们进行水平扩容，然而它究竟是依据什么原则进行请求的分发，其中又有哪些负载均衡算法可供选择和配置，今天就让我们好好来了解一下。<br><a id="more"></a></p>
+<h2 id="负载均衡的定义"><a href="#负载均衡的定义" class="headerlink" title="负载均衡的定义"></a>负载均衡的定义</h2><p>什么叫负载均衡，我们可以参考一下图片中的这种情况：</p>
+<p><img src="https://github.com/death00/gitment-comments/blob/master/imgs/2019093001.png?raw=true" alt=""></p>
+<ol>
+<li>当客户端发送请求时，会先到Nginx，然后Nginx会将请求分发到后台不同的服务器上。</li>
+<li>如果后台的服务器群中有一个宕机了，那么Nginx会自动忽略这台服务器，不会将请求再次分发到这台服务器上。</li>
+<li>如果有新加入的服务器，Nginx也会将请求分发到这台服务器上。</li>
+</ol>
+<p>我所理解的负载均衡，就是：</p>
+<blockquote>
+<p>能够将客户端的请求均匀地分发到后台各个应用服务器上，从而缓解服务器压力。</p>
+<p>并且当服务器出现宕机或者扩容时，也能正常运行。</p>
+</blockquote>
+<h2 id="负载均衡的方法"><a href="#负载均衡的方法" class="headerlink" title="负载均衡的方法"></a>负载均衡的方法</h2><p>上面了解了什么是负载均衡，那么Nginx是怎么实现这个功能的呢？</p>
+<h3 id="upstream和server的使用"><a href="#upstream和server的使用" class="headerlink" title="upstream和server的使用"></a>upstream和server的使用</h3><p>Nginx中负责与上游交互的模块，统称为upstream模块。</p>
+<p>而指定上游服务地址是通过<code>upstream</code>和<code>server</code>指令完成的，其关系为：</p>
+<p><img src="https://github.com/death00/gitment-comments/blob/master/imgs/2019093002.png?raw=true" alt=""></p>
+<p>指定上游服务器的<code>address</code>时，其地址可以是域名、IP地址或者unix socket地址。</p>
+<p>可以在域名或者IP地址后加端口，如果不加端口，那么<code>默认使用80端口</code>。</p>
+<p>在<code>address</code>后面可以添加一些参数，比如：</p>
+<p><code>backup</code>：指定当前server为备份服务，仅当非备份server不可用时，请求才会转发到该server。</p>
+<p><code>down</code>：标识某台服务已经下线，不再服务。</p>
+<p>举个例子：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> upstream-service &#123;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">127.0.0.1:17002</span>;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">127.0.0.1:17000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="round-robin"><a href="#round-robin" class="headerlink" title="round-robin"></a>round-robin</h3><p>在<code>upstream</code>这个模块中，它还提供了一个最基本的负载均衡算法<code>round-robin</code>。</p>
+<p>其功能是：</p>
+<blockquote>
+<p>以加权轮询的方式访问server指令指定的上游服务。</p>
+</blockquote>
+<p>这个算法是默认集成在Nginx的框架中，无法移除，所以后面讲解的所有算法都是基于此，所有算法在某些特殊情况下最终都会变成<code>round-robin</code>。</p>
+<p>涉及到的指令有：</p>
+<ol>
+<li><code>weight</code>：服务访问的权重，默认是1。</li>
+<li><code>max_conns</code>：server的最大并发连接数，仅作用于单worker进程。</li>
+<li><code>max_fails</code>：在<code>fail_timeout</code>时间内，最大的失败次数。当达到最大失败时，会在<code>fail_timeout</code>时间内不允许再次被选择。</li>
+<li><code>fail_timeout</code>：单位为秒，默认是10秒。指定一段时间内，最大的失败次数<code>max_fails</code>。到达<code>max_fails</code>后，该server不能访问的时间。</li>
+</ol>
+<h3 id="简单的hash模块"><a href="#简单的hash模块" class="headerlink" title="简单的hash模块"></a>简单的hash模块</h3><p>有的时候，正常的轮询算法并不能满足我们的需求，</p>
+<p>比如：带有cookie请求状态的连接，如果应用服务没有设置专门的管理cookie的服务器，那么我们就希望同一个用户能被分配到同一个服务器。</p>
+<p>再比如：我们后端应用需要针对请求当中的参数或者URL，将相同的请求放到相同的服务器上进行处理。</p>
+<p>针对第一种情况，就可以用<code>upstream_ip_hash</code>。针对第二种情况，可以使用<code>upstream_hash</code>。</p>
+<h4 id="upstream-ip-hash"><a href="#upstream-ip-hash" class="headerlink" title="upstream_ip_hash"></a>upstream_ip_hash</h4><p>功能：</p>
+<blockquote>
+<p>以客户端的IP地址作为hash算法的关键字，映射到特定的上游服务器中。</p>
+<ol>
+<li>对IPV4地址使用前3个字节作为关键字，对IPV6则使用完整地址。</li>
+<li>可以使用<code>round-robin</code>算法的参数。</li>
+<li>可以基于<code>realip</code>模块修改用于执行算法的IP地址。</li>
+</ol>
+</blockquote>
+<p>举个例子：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> upstream-service &#123;</span><br><span class="line">    ip_hash;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">127.0.0.1:17002</span>;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">127.0.0.1:17000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="upstream-hash"><a href="#upstream-hash" class="headerlink" title="upstream_hash"></a>upstream_hash</h4><p>功能：</p>
+<blockquote>
+<p>通过制定关键字作为hash key，基于hash算法映射到特定的上游服务器中。</p>
+<ol>
+<li>关键字可以含有变量、字符串。</li>
+<li>可以使用<code>round-robin</code>算法的参数。</li>
+</ol>
+</blockquote>
+<p>举个例子(以请求中的参数username作为hash key)：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> upstream-service &#123;</span><br><span class="line">    <span class="attribute">hash</span> user_<span class="variable">$arg_username</span>;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">127.0.0.1:17002</span>;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">127.0.0.1:17000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="一致性哈希算法"><a href="#一致性哈希算法" class="headerlink" title="一致性哈希算法"></a>一致性哈希算法</h3><p>hash算法在一定程度上已经可以满足了我们的业务需求，但如果这个时候遇到应用宕机或者应用扩容，那么hash的总数就会变化，这样很有可能带来大量请求原本请求的服务器会更换，路由会失效，这样对于我们的应用服务也会产生极大的影响，这时候就可以采用一致性hash算法。</p>
+<p>对于一致性哈希算法的理解，可以参考这篇文章：<a href="https://yikun.github.io/2016/06/09/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%AE%9E%E8%B7%B5/" target="_blank" rel="noopener">一致性哈希算法的理解与实践</a></p>
+<p>它的使用也十分简单，就是在之前说的<code>upstream_hash</code>模块的<code>hash</code>指令最后，添加参数<code>consistent</code>，这样Nginx就可以使用一致性哈希算法了。</p>
+<p>举个例子(仍以请求中的参数username作为hash key)：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> upstream-service &#123;</span><br><span class="line">    <span class="attribute">hash</span> user_<span class="variable">$arg_username</span> consistent;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">127.0.0.1:17002</span>;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">127.0.0.1:17000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上就是Nginx中比较常见的负载均衡方法了，还有一些比如<code>最少连接算法</code>等，都是在此之上的一些应用。如果大家有什么疑问，欢迎在下方留言。</p>
+<p>有兴趣的话可以访问我的博客或者关注我的公众号、头条号，说不定会有意外的惊喜。</p>
+<p><a href="https://death00.github.io/" target="_blank" rel="noopener">https://death00.github.io/</a></p>
+<p><img src="https://raw.githubusercontent.com/death00/gitment-comments/master/mark/attentionQrcode.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/death00/gitment-comments/master/mark/toutiaoAttentionQrcode.jpeg" alt=""></p>
 
       
     </div>
+    
+    
+    
 
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="death00 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果您感觉文章不错，也愿意支持一下作者的话</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://github.com/death00/gitment-comments/blob/master/imgs/wechatpay.jpg?raw=true" alt="death00 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Nginx/" rel="tag"># Nginx</a>
+          
+            <a href="/tags/负载均衡/" rel="tag"># 负载均衡</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/26/github博客hexo引流到微信/" rel="next" title="github博客Hexo引流到微信">
+                <i class="fa fa-chevron-left"></i> github博客Hexo引流到微信
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+    <!-- 广告 -->
+    <div id="googleAdsense">
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-6280366874210357"
+     data-ad-slot="3636563035"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+    </div>
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+  <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+<script>
+    const btw = new BTWPlugin();
+    btw.init({
+        id: 'container-1',
+        blogId: '15644-1569466671335-848',
+        name: '健程之道',
+        qrcode: 'https://raw.githubusercontent.com/death00/gitment-comments/master/imgs/wechat-qcode.jpg',
+        keyword: 'git',
+    });
+</script>
+
 
 
             </div>
@@ -362,6 +625,13 @@
 
 
           
+
+  
+    <div id="gitalk-container"></div>
+
+  
+
+
 
         </div>
         
@@ -382,8 +652,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -459,6 +738,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#负载均衡的定义"><span class="nav-number">1.</span> <span class="nav-text">负载均衡的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负载均衡的方法"><span class="nav-number">2.</span> <span class="nav-text">负载均衡的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#upstream和server的使用"><span class="nav-number">2.1.</span> <span class="nav-text">upstream和server的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#round-robin"><span class="nav-number">2.2.</span> <span class="nav-text">round-robin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单的hash模块"><span class="nav-number">2.3.</span> <span class="nav-text">简单的hash模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#upstream-ip-hash"><span class="nav-number">2.3.1.</span> <span class="nav-text">upstream_ip_hash</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#upstream-hash"><span class="nav-number">2.3.2.</span> <span class="nav-text">upstream_hash</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一致性哈希算法"><span class="nav-number">2.4.</span> <span class="nav-text">一致性哈希算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -593,6 +888,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -633,6 +932,22 @@
 
 
 
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/src/md5.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'cdd22c7b695e669f49e1',
+          clientSecret: '9a5fbb28c437389a2505a531eb66e81f0d50fba5',
+          repo: 'gitment-comments',
+          owner: 'death00',
+          admin: ['death00'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
 
 
   

@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="nginx,[object Object],upstream,IPv6," />
+  <meta name="keywords" content="Nginx,[object Object],upstream,IPv6," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="最近遇到了nginx疯狂抛错，access.log一天一共5W多条，但error.log中有大概9K多条，基本都是111: Connection refused，这到底是为什么呢？">
-<meta name="keywords" content="nginx,[object Object],upstream,IPv6">
+<meta name="description" content="最近遇到了Nginx疯狂抛错，access.log一天一共5W多条，但error.log中有大概9K多条，基本都是111: Connection refused，这到底是为什么呢？">
+<meta name="keywords" content="Nginx,[object Object],upstream,IPv6">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nginx报错111: Connection refused">
-<meta property="og:url" content="http://yoursite.com/2019/06/06/nginx报错111-Connection-refused/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/06/06/Nginx报错111-Connection-refused/index.html">
 <meta property="og:site_name" content="death00">
-<meta property="og:description" content="最近遇到了nginx疯狂抛错，access.log一天一共5W多条，但error.log中有大概9K多条，基本都是111: Connection refused，这到底是为什么呢？">
+<meta property="og:description" content="最近遇到了Nginx疯狂抛错，access.log一天一共5W多条，但error.log中有大概9K多条，基本都是111: Connection refused，这到底是为什么呢？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-06T08:49:18.194Z">
+<meta property="og:updated_time" content="2019-09-30T01:38:12.826Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nginx报错111: Connection refused">
-<meta name="twitter:description" content="最近遇到了nginx疯狂抛错，access.log一天一共5W多条，但error.log中有大概9K多条，基本都是111: Connection refused，这到底是为什么呢？">
+<meta name="twitter:description" content="最近遇到了Nginx疯狂抛错，access.log一天一共5W多条，但error.log中有大概9K多条，基本都是111: Connection refused，这到底是为什么呢？">
 
 
 
@@ -122,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/06/nginx报错111-Connection-refused/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/06/06/Nginx报错111-Connection-refused/"/>
 
 
 
@@ -322,7 +322,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/06/nginx报错111-Connection-refused/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/06/Nginx报错111-Connection-refused/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="death00">
@@ -369,7 +369,7 @@
 
           
           
-             <span id="/2019/06/06/nginx报错111-Connection-refused/" class="leancloud_visitors" data-flag-title="nginx报错111: Connection refused">
+             <span id="/2019/06/06/Nginx报错111-Connection-refused/" class="leancloud_visitors" data-flag-title="nginx报错111: Connection refused">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -400,7 +400,7 @@
       
 
       
-        <p>最近遇到了nginx疯狂抛错，access.log一天一共5W多条，但error.log中有大概9K多条，基本都是<code>111: Connection refused</code>，这到底是为什么呢？<br><a id="more"></a></p>
+        <p>最近遇到了Nginx疯狂抛错，access.log一天一共5W多条，但error.log中有大概9K多条，基本都是<code>111: Connection refused</code>，这到底是为什么呢？<br><a id="more"></a></p>
 <h2 id="从日志看起"><a href="#从日志看起" class="headerlink" title="从日志看起"></a>从日志看起</h2><p>我们还是先来看日志。我提取了一条error.log当中抛错的日志(稍微分一下行，否则实在太长，敏感信息稍微处理了一下):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2019/06/06 10:09:45 [error] 28652#0: *883239 connect() failed (111: Connection refused) while connecting to upstream, </span><br><span class="line">client: 124.104.90.145, server: xxx.xxxxx.com, request: &quot;POST /test-service/upload?mcachenum=155978698 HTTP/1.1&quot;, </span><br><span class="line">upstream: &quot;http://[::1]:17000/test-service/upload?mcachenum=155978698&quot;, host: &quot;xxx.xxxxx.com&quot;, </span><br><span class="line">referrer: &quot;https://servicewechat.com/x98b46f69/2/page-frame.html&quot;</span><br></pre></td></tr></table></figure></p>
 <p>看了一下前面的报错和后面的描述，第一眼看上去感觉都是正常。但再看之后发现，<code>upstream</code>中的host有些不一样。<code>[::1]</code>，这实际是一个IPv6的地址。</p>
 <p>这时候你可以查看一下你的机器是否开启了IPv6的地址，linux的命令是：<code>ip address</code>，看看返回结果中是否出现了<code>inet6</code>，如果有，那么恭喜你，原因找到了。</p>
@@ -461,7 +461,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/nginx/" rel="tag"># nginx</a>
+            <a href="/tags/Nginx/" rel="tag"># Nginx</a>
           
             <a href="/tags/object-Object/" rel="tag"># [object Object]</a>
           
@@ -620,7 +620,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -642,7 +642,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
