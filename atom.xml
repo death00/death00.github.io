@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-09-30T03:05:18.592Z</updated>
+  <updated>2019-10-01T01:16:41.430Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,35 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>升级@Scheduled-分布式定时任务</title>
+    <link href="http://yoursite.com/2019/09/30/%E5%8D%87%E7%BA%A7@Scheduled-%E5%88%86%E5%B8%83%E5%BC%8F%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/"/>
+    <id>http://yoursite.com/2019/09/30/升级@Scheduled-分布式定时任务/</id>
+    <published>2019-09-30T09:01:47.000Z</published>
+    <updated>2019-10-01T01:16:41.430Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近我在对项目的定时任务服务升级，希望改造成分布式，原本是利用<code>@Scheduled</code>注解实现，然而它并不支持分布式，如果改成<code>quartz</code>或者<code>Spring Cloud Task</code>，感觉对于自己这个简单的项目也没有必要。因此，我准备手写一个简单的支持分布式定时调度任务的框架。<br><a id="more"></a></p><p>项目地址是<a href="https://github.com/death00/dis-schedule" target="_blank" rel="noopener">https://github.com/death00/dis-schedule</a>，欢迎大家star、提意见。</p><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>先分析了一下自己的项目，全都是用的cron表达式，因此执行时间点都是固定的，如果升级为分布式的话，肯定是希望在同一个时间点只有一个应用去执行定时调度。</p><p>场景就变成了：</p><blockquote><p>多个应用在同一个时间都尝试去执行任务，但最终只有一个应用真正执行。</p></blockquote><p>这样的话，立马就会让人联想到使用<code>锁</code>去解决，因为是多个应用，所以就是<code>分布式锁</code>。那么，场景又变了：</p><blockquote><p>多个应用在同一个时间都尝试去获取<code>分布式锁</code>，只有一个应用能抢到这把锁，抢到锁的应用可以执行定时任务，其他应用则直接放弃，等待下一次执行时间。</p></blockquote><p>抢锁的时机是每次定时任务执行之前，这又让我联想到了<code>AOP</code>，那么利用<code>注解</code>也就顺理成章了。</p><h2 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h2><p>既然谈到了<code>分布式锁</code>，那么就想一下，这把锁的名称构成是什么。因为定时任务都有自己专门的时间，如果仅仅采用时间的话，那么当有两个任务同时执行时，则就是在抢一把锁，这同样是不合理的。</p><p>所以，锁的名称由两部分组成：任务执行时间、任务名称。</p><h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>实现方案其实已经很成熟了，可以利用<code>Redis</code>、<code>数据库</code>、<code>Zookeeper</code>等，<code>Redis</code>用的命令是<code>setNx</code>，<code>数据库</code>一般都是利用的<code>唯一索引</code>，<code>Zookeeper</code>这点我也不是很了解（如果有感兴趣的同学，欢迎在我的项目中添加）。</p><p>我的项目中实现了<code>Redis</code>、<code>数据库</code>两种方式，可以看类<code>DisScheduleRedisServiceImpl</code>、<code>DisScheduleMongodbServiceImpl</code>。</p><h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><p>其次，我自定义了一个注解<code>DisSchedule</code>，</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.METHOD)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> DisSchedule &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 定时调度任务的名称(默认是方法名)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">String <span class="title">name</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 任务的间隔时间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">duration</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * duration的时间单位(默认：分钟)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">DisScheduleUnit <span class="title">unit</span><span class="params">()</span> <span class="keyword">default</span> DisScheduleUnit.MINUTES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ol><li><code>name</code>代表此次定时调度任务的名称。</li><li><code>duration</code>代表任务的间隔时间，配合<code>unit</code>。</li><li><code>unit</code>是自定义的时间单位，有秒、分钟。</li></ol><p>该注解需要配合<code>@Scheduled</code>共同使用，例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@DisSchedule</span>(name = <span class="string">"testSchedule"</span>, duration = <span class="number">1</span>, unit = DisScheduleUnit.MINUTES)</span><br><span class="line"><span class="meta">@Scheduled</span>(cron = <span class="string">"0 0/1 * * * ?"</span>)</span><br></pre></td></tr></table></figure></p><p>该<code>cron</code>表达式代表1分钟执行一次，且是在整数分钟开始的时候执行，因此<code>@DisSchedule</code>也需要设置为1分钟的时间。</p><h2 id="切面"><a href="#切面" class="headerlink" title="切面"></a>切面</h2><p>接下来，我们只需要在<code>Aspect</code>中定义好切入点（有注解<code>@DisSchedule</code>的方法上），针对这些方法，需要使用<code>Around</code>(环绕增强)进行拦截，因为当抢不到锁的时候，就不允许执行。</p><p>具体可以参考类<code>DisScheduleAspect</code>。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上就是我实现的简单的分布式定时任务，虽然简单，但应该可以满足你的基础需求，接下来，我会在这个之上，逐步增加功能（比如监测、失败后预警等）。如果你有什么想法，欢迎在下方留言。</p><p>有兴趣的话可以访问我的博客或者关注我的公众号、头条号，说不定会有意外的惊喜。</p><p><a href="https://death00.github.io/" target="_blank" rel="noopener">https://death00.github.io/</a></p><p><img src="https://raw.githubusercontent.com/death00/gitment-comments/master/mark/attentionQrcode.jpg" alt=""></p><p><img src="https://raw.githubusercontent.com/death00/gitment-comments/master/mark/toutiaoAttentionQrcode.jpeg" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近我在对项目的定时任务服务升级，希望改造成分布式，原本是利用&lt;code&gt;@Scheduled&lt;/code&gt;注解实现，然而它并不支持分布式，如果改成&lt;code&gt;quartz&lt;/code&gt;或者&lt;code&gt;Spring Cloud Task&lt;/code&gt;，感觉对于自己这个简单的项目也没有必要。因此，我准备手写一个简单的支持分布式定时调度任务的框架。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="分布式" scheme="http://yoursite.com/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+      <category term="Scheduled" scheme="http://yoursite.com/tags/Scheduled/"/>
+    
+      <category term="定时任务" scheme="http://yoursite.com/tags/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Nginx的负载均衡</title>
     <link href="http://yoursite.com/2019/09/30/Nginx%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/"/>
     <id>http://yoursite.com/2019/09/30/Nginx的负载均衡/</id>
     <published>2019-09-30T01:34:06.000Z</published>
-    <updated>2019-09-30T03:05:18.592Z</updated>
+    <updated>2019-09-30T06:10:47.226Z</updated>
     
     <content type="html"><![CDATA[<p>我们都知道，Nginx支持负载均衡，可以很方便的帮助我们进行水平扩容，然而它究竟是依据什么原则进行请求的分发，其中又有哪些负载均衡算法可供选择和配置，今天就让我们好好来了解一下。<br><a id="more"></a></p><h2 id="负载均衡的定义"><a href="#负载均衡的定义" class="headerlink" title="负载均衡的定义"></a>负载均衡的定义</h2><p>什么叫负载均衡，我们可以参考一下图片中的这种情况：</p><p><img src="https://github.com/death00/gitment-comments/blob/master/imgs/2019093001.png?raw=true" alt=""></p><ol><li>当客户端发送请求时，会先到Nginx，然后Nginx会将请求分发到后台不同的服务器上。</li><li>如果后台的服务器群中有一个宕机了，那么Nginx会自动忽略这台服务器，不会将请求再次分发到这台服务器上。</li><li>如果有新加入的服务器，Nginx也会将请求分发到这台服务器上。</li></ol><p>我所理解的负载均衡，就是：</p><blockquote><p>能够将客户端的请求均匀地分发到后台各个应用服务器上，从而缓解服务器压力。</p><p>并且当服务器出现宕机或者扩容时，也能正常运行。</p></blockquote><h2 id="负载均衡的方法"><a href="#负载均衡的方法" class="headerlink" title="负载均衡的方法"></a>负载均衡的方法</h2><p>上面了解了什么是负载均衡，那么Nginx是怎么实现这个功能的呢？</p><h3 id="upstream和server的使用"><a href="#upstream和server的使用" class="headerlink" title="upstream和server的使用"></a>upstream和server的使用</h3><p>Nginx中负责与上游交互的模块，统称为upstream模块。</p><p>而指定上游服务地址是通过<code>upstream</code>和<code>server</code>指令完成的，其关系为：</p><p><img src="https://github.com/death00/gitment-comments/blob/master/imgs/2019093002.png?raw=true" alt=""></p><p>指定上游服务器的<code>address</code>时，其地址可以是域名、IP地址或者unix socket地址。</p><p>可以在域名或者IP地址后加端口，如果不加端口，那么<code>默认使用80端口</code>。</p><p>在<code>address</code>后面可以添加一些参数，比如：</p><p><code>backup</code>：指定当前server为备份服务，仅当非备份server不可用时，请求才会转发到该server。</p><p><code>down</code>：标识某台服务已经下线，不再服务。</p><p>举个例子：</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> upstream-service &#123;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">127.0.0.1:17002</span>;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">127.0.0.1:17000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="round-robin"><a href="#round-robin" class="headerlink" title="round-robin"></a>round-robin</h3><p>在<code>upstream</code>这个模块中，它还提供了一个最基本的负载均衡算法<code>round-robin</code>。</p><p>其功能是：</p><blockquote><p>以加权轮询的方式访问server指令指定的上游服务。</p></blockquote><p>这个算法是默认集成在Nginx的框架中，无法移除，所以后面讲解的所有算法都是基于此，所有算法在某些特殊情况下最终都会变成<code>round-robin</code>。</p><p>涉及到的指令有：</p><ol><li><code>weight</code>：服务访问的权重，默认是1。</li><li><code>max_conns</code>：server的最大并发连接数，仅作用于单worker进程。</li><li><code>max_fails</code>：在<code>fail_timeout</code>时间内，最大的失败次数。当达到最大失败时，会在<code>fail_timeout</code>时间内不允许再次被选择。</li><li><code>fail_timeout</code>：单位为秒，默认是10秒。指定一段时间内，最大的失败次数<code>max_fails</code>。到达<code>max_fails</code>后，该server不能访问的时间。</li></ol><h3 id="简单的hash模块"><a href="#简单的hash模块" class="headerlink" title="简单的hash模块"></a>简单的hash模块</h3><p>有的时候，正常的轮询算法并不能满足我们的需求，</p><p>比如：带有cookie请求状态的连接，如果应用服务没有设置专门的管理cookie的服务器，那么我们就希望同一个用户能被分配到同一个服务器。</p><p>再比如：我们后端应用需要针对请求当中的参数或者URL，将相同的请求放到相同的服务器上进行处理。</p><p>针对第一种情况，就可以用<code>upstream_ip_hash</code>。针对第二种情况，可以使用<code>upstream_hash</code>。</p><h4 id="upstream-ip-hash"><a href="#upstream-ip-hash" class="headerlink" title="upstream_ip_hash"></a>upstream_ip_hash</h4><p>功能：</p><blockquote><p>以客户端的IP地址作为hash算法的关键字，映射到特定的上游服务器中。</p><ol><li>对IPV4地址使用前3个字节作为关键字，对IPV6则使用完整地址。</li><li>可以使用<code>round-robin</code>算法的参数。</li><li>可以基于<code>realip</code>模块修改用于执行算法的IP地址。</li></ol></blockquote><p>举个例子：</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> upstream-service &#123;</span><br><span class="line">    ip_hash;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">127.0.0.1:17002</span>;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">127.0.0.1:17000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="upstream-hash"><a href="#upstream-hash" class="headerlink" title="upstream_hash"></a>upstream_hash</h4><p>功能：</p><blockquote><p>通过制定关键字作为hash key，基于hash算法映射到特定的上游服务器中。</p><ol><li>关键字可以含有变量、字符串。</li><li>可以使用<code>round-robin</code>算法的参数。</li></ol></blockquote><p>举个例子(以请求中的参数username作为hash key)：</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> upstream-service &#123;</span><br><span class="line">    <span class="attribute">hash</span> user_<span class="variable">$arg_username</span>;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">127.0.0.1:17002</span>;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">127.0.0.1:17000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="一致性哈希算法"><a href="#一致性哈希算法" class="headerlink" title="一致性哈希算法"></a>一致性哈希算法</h3><p>hash算法在一定程度上已经可以满足了我们的业务需求，但如果这个时候遇到应用宕机或者应用扩容，那么hash的总数就会变化，这样很有可能带来大量请求原本请求的服务器会更换，路由会失效，这样对于我们的应用服务也会产生极大的影响，这时候就可以采用一致性hash算法。</p><p>对于一致性哈希算法的理解，可以参考这篇文章：<a href="https://yikun.github.io/2016/06/09/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%AE%9E%E8%B7%B5/" target="_blank" rel="noopener">一致性哈希算法的理解与实践</a></p><p>它的使用也十分简单，就是在之前说的<code>upstream_hash</code>模块的<code>hash</code>指令最后，添加参数<code>consistent</code>，这样Nginx就可以使用一致性哈希算法了。</p><p>举个例子(仍以请求中的参数username作为hash key)：</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> upstream-service &#123;</span><br><span class="line">    <span class="attribute">hash</span> user_<span class="variable">$arg_username</span> consistent;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">127.0.0.1:17002</span>;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">127.0.0.1:17000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上就是Nginx中比较常见的负载均衡方法了，还有一些比如<code>最少连接算法</code>等，都是在此之上的一些应用。如果大家有什么疑问，欢迎在下方留言。</p><p>有兴趣的话可以访问我的博客或者关注我的公众号、头条号，说不定会有意外的惊喜。</p><p><a href="https://death00.github.io/" target="_blank" rel="noopener">https://death00.github.io/</a></p><p><img src="https://raw.githubusercontent.com/death00/gitment-comments/master/mark/attentionQrcode.jpg" alt=""></p><p><img src="https://raw.githubusercontent.com/death00/gitment-comments/master/mark/toutiaoAttentionQrcode.jpeg" alt=""></p>]]></content>
     
@@ -461,32 +485,6 @@
       <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
     
       <category term="shadowsocks" scheme="http://yoursite.com/tags/shadowsocks/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>初章</title>
-    <link href="http://yoursite.com/2018/09/29/%E5%88%9D%E7%AB%A0/"/>
-    <id>http://yoursite.com/2018/09/29/初章/</id>
-    <published>2018-09-29T08:10:03.000Z</published>
-    <updated>2018-09-30T02:04:14.029Z</updated>
-    
-    <content type="html"><![CDATA[<p>第一次使用hexo写博客，希望能有一个不错的开始。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;第一次使用hexo写博客，希望能有一个不错的开始。&lt;/p&gt;
-
-      
-    
-    </summary>
-    
-      <category term="其他" scheme="http://yoursite.com/categories/%E5%85%B6%E4%BB%96/"/>
-    
-    
-      <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
