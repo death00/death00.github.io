@@ -93,7 +93,7 @@
 <meta property="og:image" content="https://github.com/death00/gitment-comments/blob/master/imgs/2019101002.png?raw=true">
 <meta property="og:image" content="https://raw.githubusercontent.com/death00/gitment-comments/master/mark/attentionQrcode.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/death00/gitment-comments/master/mark/toutiaoAttentionQrcode.jpeg">
-<meta property="og:updated_time" content="2019-10-10T09:37:36.817Z">
+<meta property="og:updated_time" content="2019-10-10T09:41:45.905Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java面试- JVM 内存模型讲解">
 <meta name="twitter:description" content="经常有人会有这么一个疑惑，难道一定要懂得 JVM 的原理吗？我不懂 JVM ，但我照样可以开发。确实，但如果懂得了 JVM ，可以让你在技术的这条路上走的更远一些。">
@@ -419,7 +419,12 @@
 <p>在 Java6 版本中，永久代在非堆内存区；到了 Java7 版本，永久代的静态变量和运行时常量池被合并到了堆中；而到了 Java8，永久代被<code>元空间</code>(处于本地内存)取代了。</p>
 </blockquote>
 <p><img src="https://github.com/death00/gitment-comments/blob/master/imgs/2019101002.png?raw=true" alt=""></p>
-<p>看到这儿，就想到了 GC 回收算法，不用急，我会在下一篇文章中进行讲解。</p>
+<p>为什么要用<code>元空间</code>替换永久代呢？</p>
+<ol>
+<li>为了融合 HotSpot JVM 与 JRockit VM，因为 JRockit 没有永久代，所以不需要配置永久代。</li>
+<li>永久代内存经常不够用或发生内存溢出（应该是 JVM 中占用内存最大的一块），产生异常 <code>java.lang.OutOfMemoryError: PermGen</code>。在 JDK1.7 版本中，指定的 PermGen 区大小为 8M，由于 PermGen 中类的元数据信息在每次 FullGC 的时候都可能被收集，回收率都偏低，成绩很难令人满意；还有，为 PermGen 分配多大的空间很难确定，PermSize 的大小依赖于很多因素，比如，JVM 加载的 class 总数、常量池的大小和方法的大小等。</li>
+</ol>
+<p>看到这儿，自然就想到了 GC 回收算法，不用急，我会在之后的文章中进行讲解，现在还是以 JVM 内存模型为主。</p>
 <h3 id="方法区-Method-Area"><a href="#方法区-Method-Area" class="headerlink" title="方法区(Method Area)"></a>方法区(Method Area)</h3><p>什么是方法区？</p>
 <blockquote>
 <p>方法区主要是用来存放已被虚拟机加载的类相关信息，包括<code>类信息</code>、<code>常量池</code>(字符串常量池以及所有基本类型都有其相应的常量池)、<code>运行时常量池</code>。这其中，类信息又包括了类的版本、字段、方法、接口和父类等信息。</p>
