@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="gitalk,Error,Validation Failed," />
+  <meta name="keywords" content="Java,JVM," />
 
 
 
@@ -81,21 +81,21 @@
 
 
 
-<meta name="description" content="我现在博客的评论系统用的是gitalk，网上教程有很多，我参考的是这份教程。 当我按照网上的说法搭好后，确实是可以利用issue进行评论了，但我在新发表文章时，竟然报错了： 当时我心里一凉，难道和gitment一样，gitalk也凉了？后来上网查了一下，发现是github现在要求issue的label name不能超过50。（奥，现在我才知道，原来gitalk应该是利用label进行筛选，取得当前">
-<meta name="keywords" content="gitalk,Error,Validation Failed">
+<meta name="description" content="当我们在写代码时，一个方法内部的行数自然是越少越好，这样逻辑清晰、方便阅读，其实好处远不止如此，通过即时编译，甚至可以提高执行时的性能，今天就让我们好好来了解一下其中的原理。">
+<meta name="keywords" content="Java,JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="gitalk Error: Validation Failed">
-<meta property="og:url" content="http://yoursite.com/2018/09/30/gitalk Error Validation Failed/index.html">
+<meta property="og:title" content="Java 面试-即时编译( JIT )">
+<meta property="og:url" content="http://yoursite.com/2019/10/14/Java 面试-即时编译( JIT ) /index.html">
 <meta property="og:site_name" content="death00">
-<meta property="og:description" content="我现在博客的评论系统用的是gitalk，网上教程有很多，我参考的是这份教程。 当我按照网上的说法搭好后，确实是可以利用issue进行评论了，但我在新发表文章时，竟然报错了： 当时我心里一凉，难道和gitment一样，gitalk也凉了？后来上网查了一下，发现是github现在要求issue的label name不能超过50。（奥，现在我才知道，原来gitalk应该是利用label进行筛选，取得当前">
+<meta property="og:description" content="当我们在写代码时，一个方法内部的行数自然是越少越好，这样逻辑清晰、方便阅读，其实好处远不止如此，通过即时编译，甚至可以提高执行时的性能，今天就让我们好好来了解一下其中的原理。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://github.com/death00/gitment-comments/blob/master/imgs/menu.saveimg.savepath20180930134404.jpg?raw=true">
-<meta property="og:image" content="https://github.com/death00/gitment-comments/blob/master/imgs/menu.saveimg.savepath20180930140300.jpg?raw=true">
-<meta property="og:updated_time" content="2018-09-30T06:46:43.228Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/death00/gitment-comments/master/mark/attentionQrcode.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/death00/gitment-comments/master/mark/toutiaoAttentionQrcode.jpeg">
+<meta property="og:updated_time" content="2019-10-18T10:03:15.709Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="gitalk Error: Validation Failed">
-<meta name="twitter:description" content="我现在博客的评论系统用的是gitalk，网上教程有很多，我参考的是这份教程。 当我按照网上的说法搭好后，确实是可以利用issue进行评论了，但我在新发表文章时，竟然报错了： 当时我心里一凉，难道和gitment一样，gitalk也凉了？后来上网查了一下，发现是github现在要求issue的label name不能超过50。（奥，现在我才知道，原来gitalk应该是利用label进行筛选，取得当前">
-<meta name="twitter:image" content="https://github.com/death00/gitment-comments/blob/master/imgs/menu.saveimg.savepath20180930134404.jpg?raw=true">
+<meta name="twitter:title" content="Java 面试-即时编译( JIT )">
+<meta name="twitter:description" content="当我们在写代码时，一个方法内部的行数自然是越少越好，这样逻辑清晰、方便阅读，其实好处远不止如此，通过即时编译，甚至可以提高执行时的性能，今天就让我们好好来了解一下其中的原理。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/death00/gitment-comments/master/mark/attentionQrcode.jpg">
 
 
 
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/09/30/gitalk Error Validation Failed/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/10/14/Java 面试-即时编译( JIT ) /"/>
 
 
 
 
 
-  <title>gitalk Error: Validation Failed | death00</title>
+  <title>Java 面试-即时编译( JIT ) | death00</title>
   
 
 
@@ -325,7 +325,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/30/gitalk Error Validation Failed/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/14/Java 面试-即时编译( JIT ) /">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="death00">
@@ -342,7 +342,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">gitalk Error: Validation Failed</h1>
+          <h1 class="post-title" itemprop="name headline">Java 面试-即时编译( JIT )</h1>
         
 
         <div class="post-meta">
@@ -354,8 +354,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-30T13:46:03+08:00">
-                2018-09-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-14T09:30:00+08:00">
+                2019-10-14
               </time>
             
 
@@ -365,28 +365,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/解决问题/" itemprop="url" rel="index">
-                    <span itemprop="name">解决问题</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -394,7 +372,7 @@
 
           
           
-             <span id="/2018/09/30/gitalk Error Validation Failed/" class="leancloud_visitors" data-flag-title="gitalk Error: Validation Failed">
+             <span id="/2019/10/14/Java 面试-即时编译( JIT ) /" class="leancloud_visitors" data-flag-title="Java 面试-即时编译( JIT )">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -425,16 +403,74 @@
       
 
       
-        <p>我现在博客的评论系统用的是gitalk，网上教程有很多，我参考的是这份<a href="https://asdfv1929.github.io/2018/01/20/gitalk/" target="_blank" rel="noopener">教程</a>。</p>
-<p>当我按照网上的说法搭好后，确实是可以利用issue进行评论了，但我在新发表文章时，竟然报错了：<br><img src="https://github.com/death00/gitment-comments/blob/master/imgs/menu.saveimg.savepath20180930134404.jpg?raw=true" alt="Error: Validation Failed"></p>
-<p>当时我心里一凉，难道和gitment一样，gitalk也凉了？后来上网查了一下，发现是github现在要求issue的label name不能超过50。<br>（奥，现在我才知道，原来gitalk应该是利用label进行筛选，取得当前评论所属的issus。但后来看了一下gitalk的源代码和github关于issue的api，issue的查找应该和你的number有关，而gitalk是当你没有number时就用id代替，看的有点晕。PS：本人在前端方面纯属小白）<br><img src="https://github.com/death00/gitment-comments/blob/master/imgs/menu.saveimg.savepath20180930140300.jpg?raw=true" alt="label name长度不能超过50"></p>
-<p>好了，那就想想有什么办法可以保证名字的长度可以不超过50吧。没错，就是md5,加密过后都是32位长度，且唯一。当然了，这个也是在gitalk的<a href="https://github.com/gitalk/gitalk/issues/102" target="_blank" rel="noopener">issue</a>里查到的，接下来就来看看具体应该怎么做吧。</p>
-<h2 id="找到js版的md5算法"><a href="#找到js版的md5算法" class="headerlink" title="找到js版的md5算法"></a>找到js版的md5算法</h2><p>首推的自然是别人已经造好的成熟的轮子，<strong><a href="https://github.com/blueimp/JavaScript-MD5" target="_blank" rel="noopener">JavaScript-MD5</a></strong>这个应该是可以的，亲测有效。</p>
-<p>你只要在你的主题(比如我的就是next)下的<code>source\js\src</code>目录中创放入md5.js.min文件即可。</p>
-<h2 id="修改gitalk-swig文件"><a href="#修改gitalk-swig文件" class="headerlink" title="修改gitalk.swig文件"></a>修改gitalk.swig文件</h2><p>原本你的文件内容应该是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if page.comments &amp;&amp; theme.gitalk.enable %&#125;</span><br><span class="line">  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/gitalk/dist/gitalk.css&quot;&gt;</span><br><span class="line">  &lt;script src=&quot;https://unpkg.com/gitalk/dist/gitalk.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">   &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">        var gitalk = new Gitalk(&#123;</span><br><span class="line">          clientID: &apos;&#123;&#123; theme.gitalk.ClientID &#125;&#125;&apos;,</span><br><span class="line">          clientSecret: &apos;&#123;&#123; theme.gitalk.ClientSecret &#125;&#125;&apos;,</span><br><span class="line">          repo: &apos;&#123;&#123; theme.gitalk.repo &#125;&#125;&apos;,</span><br><span class="line">          owner: &apos;&#123;&#123; theme.gitalk.githubID &#125;&#125;&apos;,</span><br><span class="line">          admin: [&apos;&#123;&#123; theme.gitalk.adminUser &#125;&#125;&apos;],</span><br><span class="line">          id: location.pathname,</span><br><span class="line">          distractionFreeMode: &apos;&#123;&#123; theme.gitalk.distractionFreeMode &#125;&#125;&apos;</span><br><span class="line">        &#125;)</span><br><span class="line">        gitalk.render(&apos;gitalk-container&apos;)           </span><br><span class="line">       &lt;/script&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure></p>
-<p>现在改成即可(修改了第4行和第12行)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if page.comments &amp;&amp; theme.gitalk.enable %&#125;</span><br><span class="line">  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/gitalk/dist/gitalk.css&quot;&gt;</span><br><span class="line">  &lt;script src=&quot;https://unpkg.com/gitalk/dist/gitalk.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;script src=&quot;/js/src/md5.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">   &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">        var gitalk = new Gitalk(&#123;</span><br><span class="line">          clientID: &apos;&#123;&#123; theme.gitalk.ClientID &#125;&#125;&apos;,</span><br><span class="line">          clientSecret: &apos;&#123;&#123; theme.gitalk.ClientSecret &#125;&#125;&apos;,</span><br><span class="line">          repo: &apos;&#123;&#123; theme.gitalk.repo &#125;&#125;&apos;,</span><br><span class="line">          owner: &apos;&#123;&#123; theme.gitalk.githubID &#125;&#125;&apos;,</span><br><span class="line">          admin: [&apos;&#123;&#123; theme.gitalk.adminUser &#125;&#125;&apos;],</span><br><span class="line">          id: md5(location.pathname),</span><br><span class="line">          distractionFreeMode: &apos;&#123;&#123; theme.gitalk.distractionFreeMode &#125;&#125;&apos;</span><br><span class="line">        &#125;)</span><br><span class="line">        gitalk.render(&apos;gitalk-container&apos;)           </span><br><span class="line">       &lt;/script&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure></p>
-<p>然后重新发布就ok了，gitalk又可以正确创建issue了，你又可以继续评论了。</p>
-<h2 id="需要注意的问题"><a href="#需要注意的问题" class="headerlink" title="需要注意的问题"></a>需要注意的问题</h2><p>因为gitalk关联issue是通过number，你没有number的时候，它会直接利用你的id，而id的这个生成条件又被你修改了，因此你之前评论是无法和你的文章关联上了。<br>如果对js稍微感兴趣的话，应该可以顺着这个思路往下能解决。博主有空也会试试，就当研究研究js，大家要是有成功的案例，可以在通过评论告知，毕竟这也是造福大家。<br>附上<a href="https://github.com/gitalk/gitalk/blob/master/dist/gitalk.js" target="_blank" rel="noopener">gitalk源码地址</a>。</p>
+        <p>当我们在写代码时，一个方法内部的行数自然是越少越好，这样逻辑清晰、方便阅读，其实好处远不止如此，通过即时编译，甚至可以提高执行时的性能，今天就让我们好好来了解一下其中的原理。<br><a id="more"></a></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>当 JVM 的初始化完成后，类在调用执行过程中，执行引擎会把字节码转为机器码，然后在操作系统中才能执行。在字节码转换为机器码的过程中，虚拟机中还存在着一道编译，那就是<code>即时编译</code>。</p>
+<p>最初，JVM 中的字节码是由解释器（ Interpreter ）完成编译的，当虚拟机发现某个方法或代码块的运行特别频繁的时候，就会把这些代码认定为<code>热点代码</code>。</p>
+<p>为了提高热点代码的执行效率，在运行时，即时编译器（JIT，Just In Time）会把这些代码编译成与本地平台相关的机器码，并进行各层次的优化，然后保存到内存中。</p>
+<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>在 HotSpot 虚拟机中，内置了两种 JIT，分别为<code>C1 编译器</code>和<code>C2 编译器</code>，这两个编译器的编译过程是不一样的。</p>
+<h2 id="C1-编译器"><a href="#C1-编译器" class="headerlink" title="C1 编译器"></a>C1 编译器</h2><p>C1 编译器是一个简单快速的编译器，主要的关注点在于局部性的优化，适用于执行时间较短或对启动性能有要求的程序，也称为<code>Client Compiler</code>，例如，GUI 应用对界面启动速度就有一定要求。</p>
+<h2 id="C2-编译器"><a href="#C2-编译器" class="headerlink" title="C2 编译器"></a>C2 编译器</h2><p>C2 编译器是为长期运行的服务器端应用程序做性能调优的编译器，适用于执行时间较长或对峰值性能有要求的程序，也称为<code>Server Compiler</code>，例如，服务器上长期运行的 Java 应用对稳定运行就有一定的要求。</p>
+<h2 id="分层编译"><a href="#分层编译" class="headerlink" title="分层编译"></a>分层编译</h2><p>在 Java7 之前，需要根据程序的特性来选择对应的 JIT，虚拟机默认采用解释器和其中一个编译器配合工作。</p>
+<p>Java7 引入了分层编译，这种方式综合了 C1 的启动性能优势和 C2 的峰值性能优势，我们也可以通过参数 <code>-client</code>或者<code>-server</code> 强制指定虚拟机的即时编译模式。</p>
+<p>分层编译将 JVM 的执行状态分为了 5 个层次：</p>
+<blockquote>
+<p>第 0 层：程序解释执行，默认开启性能监控功能（Profiling），如果不开启，可触发第二层编译；</p>
+<p>第 1 层：可称为 C1 编译，将字节码编译为本地代码，进行简单、可靠的优化，不开启 Profiling；</p>
+<p>第 2 层：也称为 C1 编译，开启 Profiling，仅执行带方法调用次数和循环回边执行次数 profiling 的 C1 编译；</p>
+<p>第 3 层：也称为 C1 编译，执行所有带 Profiling 的 C1 编译；</p>
+<p>第 4 层：可称为 C2 编译，也是将字节码编译为本地代码，但是会启用一些编译耗时较长的优化，甚至会根据性能监控信息进行一些不可靠的激进优化。</p>
+</blockquote>
+<p>对于 C1 的三种状态，按执行效率从高至低：第 1 层、第 2层、第 3层。</p>
+<p>通常情况下，C2 的执行效率比 C1 高出30%以上。</p>
+<p>在 Java8 中，默认开启分层编译，<code>-client</code> 和 <code>-server</code> 的设置已经是无效的了。如果只想开启 C2，可以关闭分层编译（<code>-XX:-TieredCompilation</code>），如果只想用 C1，可以在打开分层编译的同时，使用参数：<code>-XX:TieredStopAtLevel=1</code>。</p>
+<p>你可以通过 <code>java -version</code>命令行可以直接查看到当前系统使用的编译模式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Administrator&gt;java -version</span><br><span class="line">java version &quot;1.8.0_45&quot;</span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_45-b14)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.45-b02, mixed mode)</span><br></pre></td></tr></table></figure></p>
+<p><code>mixed mode</code>代表是默认的混合编译模式，除了这种模式外，我们还可以使用<code>-Xint</code>参数强制虚拟机运行于只有解释器的编译模式下，这时 JIT 完全不介入工作；也可以使用参数<code>-Xcomp</code>强制虚拟机运行于只有 JIT 的编译模式下。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Administrator&gt;java -Xint -version</span><br><span class="line">java version &quot;1.8.0_45&quot;</span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_45-b14)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.45-b02, interpreted mode)</span><br><span class="line"></span><br><span class="line">C:\Users\Administrator&gt;java -Xcomp -version</span><br><span class="line">java version &quot;1.8.0_45&quot;</span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_45-b14)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.45-b02, compiled mode)</span><br></pre></td></tr></table></figure></p>
+<h1 id="触发标准"><a href="#触发标准" class="headerlink" title="触发标准"></a>触发标准</h1><p>在 HotSpot 虚拟机中，<code>热点探测</code>是 JIT 的触发标准。</p>
+<blockquote>
+<p>热点探测是基于计数器的热点探测，采用这种方法的虚拟机会为每个方法建立计数器统计方法的执行次数，如果执行次数超过一定的阈值就认为它是“热点方法” 。</p>
+</blockquote>
+<p>虚拟机为每个方法准备了两类计数器：方法调用计数器（Invocation Counter）和回边计数器（Back Edge Counter）。在确定虚拟机运行参数的前提下，这两个计数器都有一个确定的阈值，当计数器超过阈值溢出了，就会触发 JIT 编译。</p>
+<h2 id="方法调用计数器"><a href="#方法调用计数器" class="headerlink" title="方法调用计数器"></a>方法调用计数器</h2><p>方法调用计数器用于统计方法被调用的次数，默认阈值在 C1 模式下是 1500 次，在 C2 模式在是 10000 次，可通过<code>-XX: CompileThreshold</code>来设定；而在分层编译的情况下<code>-XX: CompileThreshold</code>指定的阈值将失效，此时将会根据当前待编译的方法数以及编译线程数来动态调整。当方法计数器和回边计数器之和超过方法计数器阈值时，就会触发 JIT 编译器。</p>
+<h2 id="回边计数器"><a href="#回边计数器" class="headerlink" title="回边计数器"></a>回边计数器</h2><p>回边计数器用于统计一个方法中循环体代码执行的次数，在字节码中遇到控制流向后跳转的指令称为“回边”（Back Edge），该值用于计算是否触发 C1 编译的阈值，在不开启分层编译的情况下，C1 默认为 13995，C2 默认为 10700，可通过<code>-XX: OnStackReplacePercentage=N</code>来设置；而在分层编译的情况下，<code>-XX: OnStackReplacePercentage</code>指定的阈值同样会失效，此时将根据当前待编译的方法数以及编译线程数来动态调整。</p>
+<p>建立回边计数器的主要目的是为了触发 OSR（On StackReplacement）编译，即栈上编译。在一些循环周期比较长的代码段中，当循环达到回边计数器阈值时，JVM 会认为这段是热点代码，JIT 编译器就会将这段代码编译成机器语言并缓存，在该循环时间段内，会直接将执行代码替换，执行缓存的机器语言。</p>
+<h1 id="优化技术"><a href="#优化技术" class="headerlink" title="优化技术"></a>优化技术</h1><p>JIT 编译运用了一些经典的编译优化技术来实现代码的优化，即通过一些例行检查优化，可以智能地编译出运行时的最优性能代码。主要有两种：<code>方法内联</code>、<code>逃逸分析</code>。</p>
+<h2 id="方法内联"><a href="#方法内联" class="headerlink" title="方法内联"></a>方法内联</h2><p>调用一个方法通常要经历压栈和出栈。调用方法是将程序执行顺序转移到存储该方法的内存地址，将方法的内容执行完后，再返回到执行该方法前的位置。</p>
+<p>这种执行操作要求在执行前保护现场并记忆执行的地址，执行后要恢复现场，并按原来保存的地址继续执行。 因此，方法调用会产生一定的时间和空间方面的开销（其实可以理解为一种<code>上下文切换</code>的精简版）。</p>
+<p>那么对于那些方法体代码不是很大，又频繁调用的方法来说，这个时间和空间的消耗会很大。</p>
+<p>方法内联的优化行为就是把目标方法的代码复制到发起调用的方法之中，避免发生真实的方法调用。</p>
+<p>JVM 会自动识别热点方法，并对它们使用方法内联进行优化。我们可以通过<code>-XX:CompileThreshold</code>来设置热点方法的阈值。但要强调一点，热点方法不一定会被 JVM 做内联优化，如果这个方法体太大了，JVM 将不执行内联操作。而方法体的大小阈值，我们也可以通过参数设置来优化：</p>
+<ol>
+<li>经常执行的方法，默认情况下，方法体大小小于 325 字节的都会进行内联，我们可以通过<code>-XX:MaxFreqInlineSize=N</code>来设置大小值；</li>
+<li>不是经常执行的方法，默认情况下，方法大小小于 35 字节才会进行内联，我们也可以通过<code>-XX:MaxInlineSize=N</code>来重置大小值。</li>
+</ol>
+<p>之后我们就可以通过配置 JVM 参数来查看到方法被内联的情况：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 在控制台打印编译过程信息</span><br><span class="line">-XX:+PrintCompilation</span><br><span class="line">// 解锁对 JVM 进行诊断的选项参数。默认是关闭的，开启后支持一些特定参数对 JVM 进行诊断</span><br><span class="line">-XX:+UnlockDiagnosticVMOptions</span><br><span class="line">// 将内联方法打印出来</span><br><span class="line">-XX:+PrintInlining</span><br></pre></td></tr></table></figure></p>
+<p>热点方法的优化可以有效提高系统性能，一般我们可以通过以下几种方式来提高方法内联：</p>
+<ol>
+<li>通过设置 JVM 参数来减小热点阈值或增加方法体阈值，以便更多的方法可以进行内联，但这种方法意味着需要占用更多地内存；</li>
+<li>在编程中，避免在一个方法中写大量代码，习惯使用小方法体；</li>
+<li>尽量使用 final、private、static 关键字修饰方法，编码方法因为继承，会需要额外的类型检查。</li>
+</ol>
+<blockquote>
+<p>此处就联系到了最开始提出的观点，一个方法中的内容越少，当该方法经常被执行时，则容易进行方法内联，从而优化性能。</p>
+</blockquote>
+<h2 id="逃逸分析"><a href="#逃逸分析" class="headerlink" title="逃逸分析"></a>逃逸分析</h2><p>逃逸分析（Escape Analysis）是判断一个对象是否被外部方法引用或外部线程访问的分析技术，编译器会根据逃逸分析的结果对代码进行优化。</p>
+<p>可以通过JVM参数进行设置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-XX:+DoEscapeAnalysis 开启逃逸分析（jdk1.8 默认开启）</span><br><span class="line">-XX:-DoEscapeAnalysis 关闭逃逸分析</span><br></pre></td></tr></table></figure></p>
+<p>其具体优化方法主要有三种：<code>栈上分配</code>、<code>锁消除</code>、<code>标量替换</code>。</p>
+<h3 id="栈上分配"><a href="#栈上分配" class="headerlink" title="栈上分配"></a>栈上分配</h3><p>在 Java 中默认创建一个对象是在堆中分配内存的，而当堆内存中的对象不再使用时，则需要通过垃圾回收机制回收，这个过程相对分配在栈中的对象的创建和销毁来说，更消耗时间和性能。</p>
+<p>这个时候，逃逸分析如果发现一个对象只在方法中使用，就会将对象分配在栈上。</p>
+<p>但是，HotSpot 虚拟机目前的实现导致栈上分配实现比较复杂，可以说，在 HotSpot 中暂时没有实现这项优化，所以大家可能暂时无法体会到这种优化（我看的资料显示在 Java8 中还没有实现，如果大家有什么其他的发现，欢迎留言）。</p>
+<h3 id="锁消除"><a href="#锁消除" class="headerlink" title="锁消除"></a>锁消除</h3><p>如果是在单线程环境下，其实完全没有必要使用线程安全的容器，但就算使用了，因为不会有线程竞争，这个时候 JIT 编译会对这个对象的方法锁进行锁消除。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getString</span><span class="params">(String s1, String s2)</span> </span>&#123;</span><br><span class="line">    StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">    sb.append(s1);</span><br><span class="line">    sb.append(s2);</span><br><span class="line">    <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>可以通过JVM参数进行设置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-XX:+EliminateLocks 开启锁消除（jdk1.8 默认开启）</span><br><span class="line">-XX:-EliminateLocks 关闭锁消除</span><br></pre></td></tr></table></figure></p>
+<h3 id="标量替换"><a href="#标量替换" class="headerlink" title="标量替换"></a>标量替换</h3><p>逃逸分析证明一个对象不会被外部访问，如果这个对象可以被拆分的话，当程序真正执行的时候可能不创建这个对象，而直接创建它的成员变量来代替。将对象拆分后，可以分配对象的成员变量在栈或寄存器上，原本的对象就无需分配内存空间了。这种编译优化就叫做标量替换。</p>
+<p>例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    TestInfo info = <span class="keyword">new</span> TestInfo();</span><br><span class="line">    info.id = <span class="number">1</span>;</span><br><span class="line">    info.count = <span class="number">99</span>;</span><br><span class="line">    <span class="comment">// to do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>逃逸分析后，代码会被优化为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    id = <span class="number">1</span>;</span><br><span class="line">    count = <span class="number">99</span>;</span><br><span class="line">    <span class="comment">// to do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以通过JVM参数进行设置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-XX:+EliminateAllocations 开启标量替换（jdk1.8 默认开启）</span><br><span class="line">-XX:-EliminateAllocations 关闭就可以了</span><br></pre></td></tr></table></figure></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>今天的内容，由最基本的常识<code>方法内部行数和逻辑需要尽可能简单</code>引出，了解了 JVM 通过即时编译对热点代码进行优化的过程。如果你有什么想法，欢迎在下方留言。</p>
+<p>有兴趣的话可以访问我的博客或者关注我的公众号、头条号，说不定会有意外的惊喜。</p>
+<p><a href="https://death00.github.io/" target="_blank" rel="noopener">https://death00.github.io/</a></p>
+<p><img src="https://raw.githubusercontent.com/death00/gitment-comments/master/mark/attentionQrcode.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/death00/gitment-comments/master/mark/toutiaoAttentionQrcode.jpeg" alt=""></p>
 
       
     </div>
@@ -484,11 +520,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/gitalk/" rel="tag"># gitalk</a>
+            <a href="/tags/Java/" rel="tag"># Java</a>
           
-            <a href="/tags/Error/" rel="tag"># Error</a>
-          
-            <a href="/tags/Validation-Failed/" rel="tag"># Validation Failed</a>
+            <a href="/tags/JVM/" rel="tag"># JVM</a>
           
         </div>
       
@@ -516,8 +550,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/30/Centos6安装shadowsocks及配置/" rel="next" title="Centos6安装shadowsocks及配置">
-                <i class="fa fa-chevron-left"></i> Centos6安装shadowsocks及配置
+              <a href="/2019/10/11/Java面试-JVM内存模型讲解/" rel="next" title="Java面试- JVM 内存模型讲解">
+                <i class="fa fa-chevron-left"></i> Java面试- JVM 内存模型讲解
               </a>
             
           </div>
@@ -525,10 +559,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/23/Netty-心跳相关/" rel="prev" title="Netty 心跳相关(1)">
-                Netty 心跳相关(1) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -712,7 +742,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#找到js版的md5算法"><span class="nav-number">1.</span> <span class="nav-text">找到js版的md5算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改gitalk-swig文件"><span class="nav-number">2.</span> <span class="nav-text">修改gitalk.swig文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#需要注意的问题"><span class="nav-number">3.</span> <span class="nav-text">需要注意的问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分类"><span class="nav-number">2.</span> <span class="nav-text">分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#C1-编译器"><span class="nav-number">2.1.</span> <span class="nav-text">C1 编译器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C2-编译器"><span class="nav-number">2.2.</span> <span class="nav-text">C2 编译器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分层编译"><span class="nav-number">2.3.</span> <span class="nav-text">分层编译</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#触发标准"><span class="nav-number">3.</span> <span class="nav-text">触发标准</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法调用计数器"><span class="nav-number">3.1.</span> <span class="nav-text">方法调用计数器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回边计数器"><span class="nav-number">3.2.</span> <span class="nav-text">回边计数器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优化技术"><span class="nav-number">4.</span> <span class="nav-text">优化技术</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法内联"><span class="nav-number">4.1.</span> <span class="nav-text">方法内联</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逃逸分析"><span class="nav-number">4.2.</span> <span class="nav-text">逃逸分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#栈上分配"><span class="nav-number">4.2.1.</span> <span class="nav-text">栈上分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锁消除"><span class="nav-number">4.2.2.</span> <span class="nav-text">锁消除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标量替换"><span class="nav-number">4.2.3.</span> <span class="nav-text">标量替换</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
