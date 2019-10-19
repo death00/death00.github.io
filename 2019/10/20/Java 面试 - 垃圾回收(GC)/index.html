@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="分布式,Scheduled,定时任务," />
+  <meta name="keywords" content="Java,JVM,GC," />
 
 
 
@@ -81,20 +81,20 @@
 
 
 
-<meta name="description" content="最近我在对项目的定时任务服务升级，希望改造成分布式，原本是利用@Scheduled注解实现，然而它并不支持分布式，如果改成quartz或者Spring Cloud Task，感觉对于自己这个简单的项目也没有必要。因此，我准备手写一个简单的支持分布式定时调度任务的框架。">
-<meta name="keywords" content="分布式,Scheduled,定时任务">
+<meta name="description" content="Java 中的垃圾回收，常常是由 JVM 帮我们做好的。虽然这节省了大家很多的学习的成本，提高了项目的执行效率，但是当项目变得越来越复杂，用户量越来越大时，还是需要我们懂得垃圾回收机制，这样也能进行更深一步的优化。">
+<meta name="keywords" content="Java,JVM,GC">
 <meta property="og:type" content="article">
-<meta property="og:title" content="升级@Scheduled-分布式定时任务">
-<meta property="og:url" content="http://yoursite.com/2019/09/30/升级@Scheduled-分布式定时任务/index.html">
+<meta property="og:title" content="Java面试- 垃圾回收(GC)">
+<meta property="og:url" content="http://yoursite.com/2019/10/20/Java 面试 - 垃圾回收(GC)/index.html">
 <meta property="og:site_name" content="death00">
-<meta property="og:description" content="最近我在对项目的定时任务服务升级，希望改造成分布式，原本是利用@Scheduled注解实现，然而它并不支持分布式，如果改成quartz或者Spring Cloud Task，感觉对于自己这个简单的项目也没有必要。因此，我准备手写一个简单的支持分布式定时调度任务的框架。">
+<meta property="og:description" content="Java 中的垃圾回收，常常是由 JVM 帮我们做好的。虽然这节省了大家很多的学习的成本，提高了项目的执行效率，但是当项目变得越来越复杂，用户量越来越大时，还是需要我们懂得垃圾回收机制，这样也能进行更深一步的优化。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/death00/gitment-comments/master/mark/attentionQrcode.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/death00/gitment-comments/master/mark/toutiaoAttentionQrcode.jpeg">
-<meta property="og:updated_time" content="2019-10-01T01:16:41.430Z">
+<meta property="og:updated_time" content="2019-10-19T05:12:09.056Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="升级@Scheduled-分布式定时任务">
-<meta name="twitter:description" content="最近我在对项目的定时任务服务升级，希望改造成分布式，原本是利用@Scheduled注解实现，然而它并不支持分布式，如果改成quartz或者Spring Cloud Task，感觉对于自己这个简单的项目也没有必要。因此，我准备手写一个简单的支持分布式定时调度任务的框架。">
+<meta name="twitter:title" content="Java面试- 垃圾回收(GC)">
+<meta name="twitter:description" content="Java 中的垃圾回收，常常是由 JVM 帮我们做好的。虽然这节省了大家很多的学习的成本，提高了项目的执行效率，但是当项目变得越来越复杂，用户量越来越大时，还是需要我们懂得垃圾回收机制，这样也能进行更深一步的优化。">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/death00/gitment-comments/master/mark/attentionQrcode.jpg">
 
 
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/09/30/升级@Scheduled-分布式定时任务/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/10/20/Java 面试 - 垃圾回收(GC)/"/>
 
 
 
 
 
-  <title>升级@Scheduled-分布式定时任务 | death00</title>
+  <title>Java面试- 垃圾回收(GC) | death00</title>
   
 
 
@@ -325,7 +325,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/30/升级@Scheduled-分布式定时任务/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/20/Java 面试 - 垃圾回收(GC)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="death00">
@@ -342,7 +342,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">升级@Scheduled-分布式定时任务</h1>
+          <h1 class="post-title" itemprop="name headline">Java面试- 垃圾回收(GC)</h1>
         
 
         <div class="post-meta">
@@ -354,8 +354,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-30T17:01:47+08:00">
-                2019-09-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-20T09:30:00+08:00">
+                2019-10-20
               </time>
             
 
@@ -372,7 +372,7 @@
 
           
           
-             <span id="/2019/09/30/升级@Scheduled-分布式定时任务/" class="leancloud_visitors" data-flag-title="升级@Scheduled-分布式定时任务">
+             <span id="/2019/10/20/Java 面试 - 垃圾回收(GC)/" class="leancloud_visitors" data-flag-title="Java面试- 垃圾回收(GC)">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -403,34 +403,41 @@
       
 
       
-        <p>最近我在对项目的定时任务服务升级，希望改造成分布式，原本是利用<code>@Scheduled</code>注解实现，然而它并不支持分布式，如果改成<code>quartz</code>或者<code>Spring Cloud Task</code>，感觉对于自己这个简单的项目也没有必要。因此，我准备手写一个简单的支持分布式定时调度任务的框架。<br><a id="more"></a></p>
-<p>项目地址是<a href="https://github.com/death00/dis-schedule" target="_blank" rel="noopener">https://github.com/death00/dis-schedule</a>，欢迎大家star、提意见。</p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>先分析了一下自己的项目，全都是用的cron表达式，因此执行时间点都是固定的，如果升级为分布式的话，肯定是希望在同一个时间点只有一个应用去执行定时调度。</p>
-<p>场景就变成了：</p>
+        <p>Java 中的垃圾回收，常常是由 JVM 帮我们做好的。虽然这节省了大家很多的学习的成本，提高了项目的执行效率，但是当项目变得越来越复杂，用户量越来越大时，还是需要我们懂得垃圾回收机制，这样也能进行更深一步的优化。<br><a id="more"></a></p>
+<h2 id="辨别对象存亡"><a href="#辨别对象存亡" class="headerlink" title="辨别对象存亡"></a>辨别对象存亡</h2><p>垃圾回收( Garbage Collection，以下简称 GC )，从字面上理解，就是将已经分配出去的，但却不再使用的内存回收回来，以便能够再次分配。</p>
+<p>在 JVM 中，垃圾就是指的死亡对象所占据的堆空间( GC 是发生在堆空间中)，那么我们如果辨别一个对象是否死亡呢？JVM 使用的是<code>引用计数法</code>和<code>可达性分析</code>。</p>
+<h3 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h3><p>引用计数法( Reference Counting)，是为每个对象添加一个引用计数器，用来统计引用该对象的个数。一旦某个对象的引用计数器为0，则说明该对象已经死亡，便可以被回收了。</p>
+<p>其具体实现为：</p>
 <blockquote>
-<p>多个应用在同一个时间都尝试去执行任务，但最终只有一个应用真正执行。</p>
+<p>如果有一个引用，被赋值为某一对象，那么将该对象的引用计数器 +1。</p>
+<p>如果一个指向某一对象的引用，被赋值为其他值，那么将该对象的引用计数器 -1。</p>
+<p>也就是说，我们需要截获所有的引用更新操作，并且相应地增减目标对象的引用计数器。</p>
 </blockquote>
-<p>这样的话，立马就会让人联想到使用<code>锁</code>去解决，因为是多个应用，所以就是<code>分布式锁</code>。那么，场景又变了：</p>
-<blockquote>
-<p>多个应用在同一个时间都尝试去获取<code>分布式锁</code>，只有一个应用能抢到这把锁，抢到锁的应用可以执行定时任务，其他应用则直接放弃，等待下一次执行时间。</p>
-</blockquote>
-<p>抢锁的时机是每次定时任务执行之前，这又让我联想到了<code>AOP</code>，那么利用<code>注解</code>也就顺理成章了。</p>
-<h2 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h2><p>既然谈到了<code>分布式锁</code>，那么就想一下，这把锁的名称构成是什么。因为定时任务都有自己专门的时间，如果仅仅采用时间的话，那么当有两个任务同时执行时，则就是在抢一把锁，这同样是不合理的。</p>
-<p>所以，锁的名称由两部分组成：任务执行时间、任务名称。</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>实现方案其实已经很成熟了，可以利用<code>Redis</code>、<code>数据库</code>、<code>Zookeeper</code>等，<code>Redis</code>用的命令是<code>setNx</code>，<code>数据库</code>一般都是利用的<code>唯一索引</code>，<code>Zookeeper</code>这点我也不是很了解（如果有感兴趣的同学，欢迎在我的项目中添加）。</p>
-<p>我的项目中实现了<code>Redis</code>、<code>数据库</code>两种方式，可以看类<code>DisScheduleRedisServiceImpl</code>、<code>DisScheduleMongodbServiceImpl</code>。</p>
-<h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><p>其次，我自定义了一个注解<code>DisSchedule</code>，</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.METHOD)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> DisSchedule &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 定时调度任务的名称(默认是方法名)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">String <span class="title">name</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 任务的间隔时间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">duration</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * duration的时间单位(默认：分钟)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">DisScheduleUnit <span class="title">unit</span><span class="params">()</span> <span class="keyword">default</span> DisScheduleUnit.MINUTES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看似很简单的实现，其实里面有不少缺陷：</p>
 <ol>
-<li><code>name</code>代表此次定时调度任务的名称。</li>
-<li><code>duration</code>代表任务的间隔时间，配合<code>unit</code>。</li>
-<li><code>unit</code>是自定义的时间单位，有秒、分钟。</li>
+<li>需要额外的空间来存储计数器。</li>
+<li>计数器的更新操作十分繁琐。</li>
+<li>最重要的：无法处理循环引用对象。</li>
 </ol>
-<p>该注解需要配合<code>@Scheduled</code>共同使用，例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@DisSchedule</span>(name = <span class="string">"testSchedule"</span>, duration = <span class="number">1</span>, unit = DisScheduleUnit.MINUTES)</span><br><span class="line"><span class="meta">@Scheduled</span>(cron = <span class="string">"0 0/1 * * * ?"</span>)</span><br></pre></td></tr></table></figure></p>
-<p>该<code>cron</code>表达式代表1分钟执行一次，且是在整数分钟开始的时候执行，因此<code>@DisSchedule</code>也需要设置为1分钟的时间。</p>
-<h2 id="切面"><a href="#切面" class="headerlink" title="切面"></a>切面</h2><p>接下来，我们只需要在<code>Aspect</code>中定义好切入点（有注解<code>@DisSchedule</code>的方法上），针对这些方法，需要使用<code>Around</code>(环绕增强)进行拦截，因为当抢不到锁的时候，就不允许执行。</p>
-<p>具体可以参考类<code>DisScheduleAspect</code>。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上就是我实现的简单的分布式定时任务，虽然简单，但应该可以满足你的基础需求，接下来，我会在这个之上，逐步增加功能（比如监测、失败后预警等）。如果你有什么想法，欢迎在下方留言。</p>
+<p>针对第3点，举个例子特别说明一下：</p>
+<p>假设对象 a 与 b 相互引用，除此之外没有其他引用指向他们。在这种情况下，a 和 b 实际上已经死了。</p>
+<p>但由于它们的引用计数器皆不为0（因为相互引用，两者均为1），在引用计数法的计算中，这两个对象还活着。因此，这些循环引用对象所占据的空间将不可回收，从而造成了<code>内存泄露</code>。</p>
+<h3 id="可达性分析"><a href="#可达性分析" class="headerlink" title="可达性分析"></a>可达性分析</h3><p>可达性分析( Reachability Analysis )，是目前 JVM 主要采取的判定对象死亡的方法。实质在于将一系列<code>GC Roots</code>作为初始的存活对象合集（live set），然后从该合集出发，探索所有能够被该集合引用到的对象，并将其加入到该集合中，这个过程我们也称之为标记（mark）。最终，未被探索到的对象便是死亡的，是可以回收的。</p>
+<p>那么什么是<code>GC Roots</code>呢？我们可以暂时理解为由堆外指向堆内的引用，一般而言，GC Roots 包括（但不限于）如下几种：</p>
+<ol>
+<li>Java 方法栈桢中的局部变量</li>
+<li>已加载类的静态变量</li>
+<li>JNI handles</li>
+<li>已启动且未停止的 Java 线程</li>
+</ol>
+<p>之前我们说<code>引用计数法</code>会有循环引用的问题，<code>可达性分析</code>就不会了。举例来说，即便对象 a 和 b 相互引用，只要从 GC Roots 出发无法到达 a 或者 b，那么可达性分析便会认为它们已经死亡。</p>
+<p>那<code>可达性分析</code>有没有什么缺点呢？有的，在多线程环境下，其他线程可能会更新已经分析过的对象中的引用，从而造成误报（将引用设置为 null）或者漏报（将引用设置为未被访问过的对象）。</p>
+<p>误报并没有什么伤害，JVM 至多损失了部分垃圾回收的机会。漏报则比较麻烦，因为垃圾回收器可能回收事实上仍被引用的对象内存。一旦从原引用访问已经被回收了的对象，则很有可能会直接导致 JVM 崩溃。</p>
+<h3 id="STW"><a href="#STW" class="headerlink" title="STW"></a>STW</h3><p>既然<code>可达性分析</code>在多线程下有缺点，那 JVM 是如何解决的呢？答案便是 Stop-the-world(以下简称<code>JWT</code>)，停止了其他非垃圾回收线程的工作直到完成垃圾回收。这也就造成了垃圾回收所谓的暂停时间（GC pause）。</p>
+<p>那 SWT 是如何实现的呢？当 JVM 收到 SWT 请求后，它会等待所有的线程都到达安全点（Safe Point），才允许请求 SWT 的线程进行独占的工作。</p>
+<p>那什么又叫安全点呢？安全点是 JVM 能找到一个稳定的执行状态，在这个执行状态下，JVM 的堆栈不会发生变化。</p>
+<p>这么一来，垃圾回收器便能够“安全”地执行可达性分析，所有存活的对象也都可以成功被标记，那么之后就可以将死亡的对象进行垃圾回收了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上便是发现死亡对象的过程，这也为之后的垃圾回收进行铺垫，具体的垃圾回收过程，我会在下一篇文章中讲述，敬请期待。</p>
 <p>有兴趣的话可以访问我的博客或者关注我的公众号、头条号，说不定会有意外的惊喜。</p>
 <p><a href="https://death00.github.io/" target="_blank" rel="noopener">https://death00.github.io/</a></p>
 <p><img src="https://raw.githubusercontent.com/death00/gitment-comments/master/mark/attentionQrcode.jpg" alt=""></p>
@@ -484,11 +491,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/分布式/" rel="tag"># 分布式</a>
+            <a href="/tags/Java/" rel="tag"># Java</a>
           
-            <a href="/tags/Scheduled/" rel="tag"># Scheduled</a>
+            <a href="/tags/JVM/" rel="tag"># JVM</a>
           
-            <a href="/tags/定时任务/" rel="tag"># 定时任务</a>
+            <a href="/tags/GC/" rel="tag"># GC</a>
           
         </div>
       
@@ -516,8 +523,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/30/Nginx的负载均衡/" rel="next" title="Nginx的负载均衡">
-                <i class="fa fa-chevron-left"></i> Nginx的负载均衡
+              <a href="/2019/10/14/Java 面试-即时编译( JIT ) /" rel="next" title="Java 面试-即时编译( JIT )">
+                <i class="fa fa-chevron-left"></i> Java 面试-即时编译( JIT )
               </a>
             
           </div>
@@ -525,10 +532,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/10/02/Java中Synchronized的优化原理/" rel="prev" title="Java中Synchronized的优化原理">
-                Java中Synchronized的优化原理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -712,7 +715,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#分析"><span class="nav-number">1.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式锁"><span class="nav-number">2.</span> <span class="nav-text">分布式锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">2.1.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解"><span class="nav-number">3.</span> <span class="nav-text">注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#切面"><span class="nav-number">4.</span> <span class="nav-text">切面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#辨别对象存亡"><span class="nav-number">1.</span> <span class="nav-text">辨别对象存亡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引用计数法"><span class="nav-number">1.1.</span> <span class="nav-text">引用计数法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可达性分析"><span class="nav-number">1.2.</span> <span class="nav-text">可达性分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STW"><span class="nav-number">1.3.</span> <span class="nav-text">STW</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
