@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://imgkr.cn-bj.ufileos.com/01be7a29-45a6-4739-ae17-807c175741db.jfif">
 <meta property="og:image" content="https://imgkr.cn-bj.ufileos.com/2984c6cb-07db-460e-aa3a-4dde4df2f4cc.jfif">
-<meta property="og:updated_time" content="2020-01-04T02:50:27.287Z">
+<meta property="og:updated_time" content="2020-01-04T06:21:49.372Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="力扣73——矩阵置零">
 <meta name="twitter:description" content="准备开一个力扣解题的系列，督促自己每天刷题，就从今天开始。">
@@ -448,7 +448,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setZeroes</span><span class="params">(<span class="keyword">int</span>[][] matrix)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 第一列是否需要置零</span></span><br><span class="line">        <span class="keyword">boolean</span> col0 = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">int</span> row = matrix.length;</span><br><span class="line">        <span class="keyword">int</span> col = matrix[<span class="number">0</span>].length;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 判断是否需要置零</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; i++) &#123;</span><br><span class="line">            <span class="comment">// 如果第一列不需要置零，并且第一列有数字是0，则col0设置为true</span></span><br><span class="line">            <span class="keyword">if</span> (!col0 &amp;&amp; matrix[i][<span class="number">0</span>] == <span class="number">0</span>) &#123;</span><br><span class="line">                col0 = <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; col; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (matrix[i][j] == <span class="number">0</span>) &#123;</span><br><span class="line">                    matrix[i][<span class="number">0</span>] = matrix[<span class="number">0</span>][j] = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 置零，从后往前开始，因为如果从前往后，第一行如果因为第一列置为0，会对之后结果误导</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = row - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="comment">// 第一列不动</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = col - <span class="number">1</span>; j &gt;= <span class="number">1</span>; j--) &#123;</span><br><span class="line">                <span class="keyword">if</span> (matrix[i][<span class="number">0</span>] == <span class="number">0</span> || matrix[<span class="number">0</span>][j] == <span class="number">0</span>) &#123;</span><br><span class="line">                    matrix[i][j] = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 第一列置零</span></span><br><span class="line">            <span class="keyword">if</span> (col0) &#123;</span><br><span class="line">                matrix[i][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上就是这道题目我的解答过程了，不知道大家是否理解了。我准备把我刷力扣的过程记录下来，作为这个系列的内容，希望能和大家多多分享。</p>
 <p>有兴趣的话可以访问我的博客或者关注我的公众号、头条号，说不定会有意外的惊喜。</p>
-<p><a href="https://jjcoder.top/" target="_blank" rel="noopener">https://jjcoder.top/</a></p>
+<p><a href="https://death00.github.io/" target="_blank" rel="noopener">https://death00.github.io/</a></p>
 <p>公众号：健程之道</p>
 <p><img src="https://imgkr.cn-bj.ufileos.com/01be7a29-45a6-4739-ae17-807c175741db.jfif" alt=""></p>
 <p><img src="https://imgkr.cn-bj.ufileos.com/2984c6cb-07db-460e-aa3a-4dde4df2f4cc.jfif" alt=""></p>
@@ -532,6 +532,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/21/力扣71——简化路径/" rel="prev" title="力扣71——简化路径">
+                力扣71——简化路径 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -644,7 +648,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -666,7 +670,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
