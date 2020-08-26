@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="true" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="树,深度优先遍历," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本题主要在于对树这种数据结构的考察，以及深度优先遍历的使用，优化时可以采取空间换时间的策略。">
+<meta name="keywords" content="树,深度优先遍历">
+<meta property="og:type" content="article">
+<meta property="og:title" content="力扣 1519——子树中标签相同的节点数">
+<meta property="og:url" content="https://www.death00.top/2020/08/08/力扣 1519——子树中标签相同的节点数/index.html">
+<meta property="og:site_name" content="健程之道">
+<meta property="og:description" content="本题主要在于对树这种数据结构的考察，以及深度优先遍历的使用，优化时可以采取空间换时间的策略。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/07/19/q3e1.jpg">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/07/19/q3e2.jpg">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/07/19/q3e3.jpg">
+<meta property="og:image" content="https://static01.imgkr.com/temp/dcfad764025e4ea9ab8d73ef0934efdd.png">
+<meta property="og:image" content="https://static01.imgkr.com/temp/003e8c4d5f5544b0bd70dfe7aa63bf60.png">
+<meta property="og:updated_time" content="2020-08-26T12:49:55.531Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="力扣 1519——子树中标签相同的节点数">
+<meta name="twitter:description" content="本题主要在于对树这种数据结构的考察，以及深度优先遍历的使用，优化时可以采取空间换时间的策略。">
+<meta name="twitter:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/07/19/q3e1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'TKE2WB1FXU',
+      apiKey: '',
+      indexName: 'search',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.death00.top/2020/08/08/力扣 1519——子树中标签相同的节点数/"/>
+
+
+
+
+
+  <title>力扣 1519——子树中标签相同的节点数 | 健程之道</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-128521269-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2b13a5474e5839afe465b0f4ee61495b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-6280366874210357",
+      enable_page_level_ads: true
+    });
+  </script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">健程之道</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-6280366874210357",
+    enable_page_level_ads: true
+  });
+</script>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="container-1">
+            <div id="content" class="content">
+              
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.death00.top/2020/08/08/力扣 1519——子树中标签相同的节点数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="健健">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="健程之道">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">力扣 1519——子树中标签相同的节点数</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-08T09:00:00+08:00">
+                2020-08-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/力扣/" itemprop="url" rel="index">
+                    <span itemprop="name">力扣</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2020/08/08/力扣 1519——子树中标签相同的节点数/" class="leancloud_visitors" data-flag-title="力扣 1519——子树中标签相同的节点数">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本题主要在于对树这种数据结构的考察，以及深度优先遍历的使用，优化时可以采取空间换时间的策略。<br><a id="more"></a></p>
+<h2 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h2><p>给你一棵树（即，一个连通的无环无向图），这棵树由编号从 0  到 n - 1 的 n 个节点组成，且恰好有 n - 1 条 edges 。树的根节点为节点 0 ，树上的每一个节点都有一个标签，也就是字符串 labels 中的一个小写字符（编号为 i 的 节点的标签就是 labels[i] ）</p>
+<p>边数组 edges 以 edges[i] = [ai, bi] 的形式给出，该格式表示节点 ai 和 bi 之间存在一条边。</p>
+<p>返回一个大小为 n 的数组，其中 ans[i] 表示第 i 个节点的子树中与节点 i 标签相同的节点数。</p>
+<p>树 T 中的子树是由 T 中的某个节点及其所有后代节点组成的树。</p>
+<p>示例 1：</p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/07/19/q3e1.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 7, edges = [[0,1],[0,2],[1,4],[1,5],[2,3],[2,6]], labels = &quot;abaedcd&quot;</span><br><span class="line">输出：[2,1,1,1,1,1,1]</span><br><span class="line">解释：节点 0 的标签为 &apos;a&apos; ，以 &apos;a&apos; 为根节点的子树中，节点 2 的标签也是 &apos;a&apos; ，因此答案为 2 。注意树中的每个节点都是这棵子树的一部分。</span><br><span class="line">节点 1 的标签为 &apos;b&apos; ，节点 1 的子树包含节点 1、4 和 5，但是节点 4、5 的标签与节点 1 不同，故而答案为 1（即，该节点本身）。</span><br></pre></td></tr></table></figure>
+<p>示例 2：</p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/07/19/q3e2.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 4, edges = [[0,1],[1,2],[0,3]], labels = &quot;bbbb&quot;</span><br><span class="line">输出：[4,2,1,1]</span><br><span class="line">解释：节点 2 的子树中只有节点 2 ，所以答案为 1 。</span><br><span class="line">节点 3 的子树中只有节点 3 ，所以答案为 1 。</span><br><span class="line">节点 1 的子树中包含节点 1 和 2 ，标签都是 &apos;b&apos; ，因此答案为 2 。</span><br><span class="line">节点 0 的子树中包含节点 0、1、2 和 3，标签都是 &apos;b&apos;，因此答案为 4 。</span><br></pre></td></tr></table></figure>
+<p>示例 3 ：</p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/07/19/q3e3.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 5, edges = [[0,1],[0,2],[1,3],[0,4]], labels = &quot;aabab&quot;</span><br><span class="line">输出：[3,2,1,1,1]</span><br></pre></td></tr></table></figure>
+<p>示例 4：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 6, edges = [[0,1],[0,2],[1,3],[3,4],[4,5]], labels = &quot;cbabaa&quot;</span><br><span class="line">输出：[1,2,1,1,2,1]</span><br></pre></td></tr></table></figure>
+<p>示例 5：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 7, edges = [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6]], labels = &quot;aaabaaa&quot;</span><br><span class="line">输出：[6,5,4,1,3,2,1]</span><br></pre></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>1 &lt;= n &lt;= 10^5</li>
+<li>edges.length == n - 1</li>
+<li>edges[i].length == 2</li>
+<li>0 &lt;= ai, bi &lt; n</li>
+<li>ai != bi</li>
+<li>labels.length == n</li>
+<li>labels 仅由小写英文字母组成</li>
+</ul>
+<p>原题 url：<a href="https://leetcode-cn.com/problems/number-of-nodes-in-the-sub-tree-with-the-same-label" target="_blank" rel="noopener">https://leetcode-cn.com/problems/number-of-nodes-in-the-sub-tree-with-the-same-label</a></p>
+<h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><h3 id="首次尝试"><a href="#首次尝试" class="headerlink" title="首次尝试"></a>首次尝试</h3><p>这道题是要让我们计算：在子树中，和当前节点字符相同的节点个数。</p>
+<p>那么我们就必然需要构建树中各个节点的关系，那么就需要记录父子节点的关系，因为是普通的树，一个节点的子节点可能有多个，因此我用<code>LinkedList&lt;Integer&gt;[] tree</code>这样一个数组进行存储，其中<code>tree[i]</code>代表节点 i 的所有子节点。</p>
+<p>至于求相同节点的个数，我想着可以从根节点 0 开始逐个遍历，先获取其第一层子节点，再根据第一层子节点逐个获取，可以采用广度优先遍历的形式。</p>
+<p>让我们看看代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] countSubTrees(<span class="keyword">int</span> n, <span class="keyword">int</span>[][] edges, String labels) &#123;</span><br><span class="line">        <span class="comment">// 构造树</span></span><br><span class="line">        LinkedList&lt;Integer&gt;[] tree = <span class="keyword">new</span> LinkedList[n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span>[] edge : edges) &#123;</span><br><span class="line">            <span class="comment">// edge[0]的子节点</span></span><br><span class="line">            LinkedList&lt;Integer&gt; child = tree[edge[<span class="number">0</span>]];</span><br><span class="line">            <span class="keyword">if</span> (child == <span class="keyword">null</span>) &#123;</span><br><span class="line">                child = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">                tree[edge[<span class="number">0</span>]] = child;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 增加子节点</span></span><br><span class="line">            child.add(edge[<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 结果</span></span><br><span class="line">        <span class="keyword">int</span>[] result = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        <span class="comment">// 遍历并计算</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="comment">// 需要遍历的字符</span></span><br><span class="line">            <span class="keyword">char</span> cur = labels.charAt(i);</span><br><span class="line">            <span class="comment">// 该节点的子树中与该字符相同的节点数</span></span><br><span class="line">            <span class="keyword">int</span> curCount = <span class="number">0</span>;</span><br><span class="line">            <span class="comment">// 广度优先遍历</span></span><br><span class="line">            LinkedList&lt;Integer&gt; searchList = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">            searchList.add(i);</span><br><span class="line">            <span class="keyword">while</span>(!searchList.isEmpty()) &#123;</span><br><span class="line">                <span class="keyword">int</span> index = searchList.removeFirst();</span><br><span class="line">                <span class="keyword">if</span> (cur == labels.charAt(index)) &#123;</span><br><span class="line">                    curCount++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 找出该节点的子树</span></span><br><span class="line">                <span class="keyword">if</span> (tree[index] == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                searchList.addAll(tree[index]);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            result[i] = curCount;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>提交之后，发现有<code>错误</code>。错误的情况是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">4</span><br><span class="line">[[0,2],[0,3],[1,2]]</span><br><span class="line">&quot;aeed&quot;</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">[1,2,1,1]</span><br><span class="line"></span><br><span class="line">预期：</span><br><span class="line">[1,1,2,1]</span><br></pre></td></tr></table></figure></p>
+<p>根据这样输入，我构造出的树是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1   0</span><br><span class="line"> \ / \</span><br><span class="line">  2   3</span><br></pre></td></tr></table></figure></p>
+<p>但根据预期结果反推出来的树是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    0</span><br><span class="line">   / \</span><br><span class="line">  2   3</span><br><span class="line"> /</span><br><span class="line">1</span><br></pre></td></tr></table></figure></p>
+<p>那么输入中最后给出的<code>[1,2]</code>就不是从<code>父节点</code>指向<code>子节点</code>，也就是输入中给出的边关联的节点顺序，是任意的。</p>
+<p>那我们的树究竟该如何构造呢？</p>
+<h3 id="双向记录构造树"><a href="#双向记录构造树" class="headerlink" title="双向记录构造树"></a>双向记录构造树</h3><p>既然我们在构造树的时候，无法直接得出父子关系，那么就将对应两个节点同时记录另一个节点。</p>
+<p>根据题目中给出的条件：<code>树的根节点为节点 0</code>。这样我们在遍历的时候，就从 0 开始，只要 0 关联的节点，一定是 0 的子节点。将这些节点进行标记，这样再递归访问接下来的节点时，如果是标记过的，则说明是父节点，这样就可以明确父子节点关系了。</p>
+<p>至于遍历的时候，因为这次我们是不知道父子节点关系的，所以无法直接采用广度优先遍历，换成<code>深度优先遍历</code>。</p>
+<p>让我们看看代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 总节点数</span></span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="comment">// 树</span></span><br><span class="line">    Map&lt;Integer, LinkedList&lt;Integer&gt;&gt; tree;</span><br><span class="line">    <span class="comment">// 字符串</span></span><br><span class="line">    String labels;</span><br><span class="line">    <span class="comment">// 最终结果</span></span><br><span class="line">    <span class="keyword">int</span>[] result;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] countSubTrees(<span class="keyword">int</span> n, <span class="keyword">int</span>[][] edges, String labels) &#123;</span><br><span class="line">        <span class="keyword">this</span>.n = n;</span><br><span class="line">        <span class="keyword">this</span>.labels = labels;</span><br><span class="line">        result = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line"></span><br><span class="line">        LinkedList&lt;Integer&gt; list;</span><br><span class="line">        <span class="comment">// 双向构造树的关系</span></span><br><span class="line">        tree = <span class="keyword">new</span> HashMap&lt;&gt;(n / <span class="number">4</span> * <span class="number">3</span> + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span>[] edge : edges) &#123;</span><br><span class="line">            <span class="comment">// 添加映射关系</span></span><br><span class="line">            list = tree.computeIfAbsent(edge[<span class="number">0</span>], k -&gt; <span class="keyword">new</span> LinkedList&lt;&gt;());</span><br><span class="line">            list.add(edge[<span class="number">1</span>]);</span><br><span class="line">            list = tree.computeIfAbsent(edge[<span class="number">1</span>], k -&gt; <span class="keyword">new</span> LinkedList&lt;&gt;());</span><br><span class="line">            list.add(edge[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 深度优先搜索</span></span><br><span class="line">        dfs(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] dfs(<span class="keyword">int</span> index) &#123;</span><br><span class="line">        <span class="comment">// 当前子树中，所有字符的个数</span></span><br><span class="line">        <span class="keyword">int</span>[] charArray = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">26</span>];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 开始计算，标志该节点已经计算过</span></span><br><span class="line">        result[index] = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 获得其关联的节点</span></span><br><span class="line">        List&lt;Integer&gt; nodes = tree.get(index);</span><br><span class="line">        <span class="comment">// 遍历</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> node : nodes) &#123;</span><br><span class="line">            <span class="comment">// 如果该节点已经访问过</span></span><br><span class="line">            <span class="keyword">if</span> (result[node] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 递归遍历子节点</span></span><br><span class="line">            <span class="keyword">int</span>[] array = dfs(node);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++) &#123;</span><br><span class="line">                charArray[i] += array[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 将当前节点的值计算一下</span></span><br><span class="line">        charArray[labels.charAt(index) - <span class="string">'a'</span>] += <span class="number">1</span>;</span><br><span class="line">        result[index] = charArray[labels.charAt(index) - <span class="string">'a'</span>];</span><br><span class="line">        <span class="keyword">return</span> charArray;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>提交OK，执行用时<code>136ms</code>，超过<code>36.71%</code>，内存消耗<code>104.5MB</code>，超过<code>91.38%</code>。</p>
+<p>时间复杂度上，应该是要研究<code>dfs</code>方法中的两个<code>for</code>循环，外层肯定是每个节点都遍历一遍，内层还需要遍历<code>26</code>个英文字母，也就是<code>O(n)</code>。</p>
+<p>空间复杂度上，最大的应该就是存储节点映射关系的<code>tree</code>了，里面实际上就是 2n 个节点（因为每条边对应的两个节点都会互相存一次对方），因此也就是<code>O(n)</code>。</p>
+<p>虽然过了，但执行速度很慢，可以进一步优化。</p>
+<h3 id="用空间换时间"><a href="#用空间换时间" class="headerlink" title="用空间换时间"></a>用空间换时间</h3><p>针对我上面的解法，其中<code>tree</code>我是用的<code>Map</code>，虽然其<code>get</code>方法理论上是<code>O(n)</code>，但毕竟涉及 hash，可以优化成数组。</p>
+<p>至于每次取节点对应的字符所用的<code>charAt</code>方法，具体其实是：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">charAt</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ((index &lt; <span class="number">0</span>) || (index &gt;= value.length)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(index);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> value[index];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>每次都会检查一次 index，其实这完全是可以省略的，因此可以提前构造好每个位置对应的值，也用一个数组存储。</p>
+<p>让我们看看新的代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 总节点数</span></span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="comment">// 树</span></span><br><span class="line">    LinkedList&lt;Integer&gt;[] tree;</span><br><span class="line">    <span class="comment">// 每个节点的值（用数字表示）</span></span><br><span class="line">    <span class="keyword">int</span>[] nodeValueArray;</span><br><span class="line">    <span class="comment">// 最终结果</span></span><br><span class="line">    <span class="keyword">int</span>[] result;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] countSubTrees(<span class="keyword">int</span> n, <span class="keyword">int</span>[][] edges, String labels) &#123;</span><br><span class="line">        <span class="keyword">this</span>.n = n;</span><br><span class="line">        nodeValueArray = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        result = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 双向构造树的关系</span></span><br><span class="line">        tree = <span class="keyword">new</span> LinkedList[n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            tree[i] = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span>[] edge : edges) &#123;</span><br><span class="line">            <span class="comment">// 添加映射关系</span></span><br><span class="line">            tree[edge[<span class="number">0</span>]].add(edge[<span class="number">1</span>]);</span><br><span class="line">            tree[edge[<span class="number">1</span>]].add(edge[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 生成节点的值</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            nodeValueArray[i] = labels.charAt(i) - <span class="string">'a'</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 深度优先搜索</span></span><br><span class="line">        dfs(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] dfs(<span class="keyword">int</span> index) &#123;</span><br><span class="line">        <span class="comment">// 当前子树中，所有字符的个数</span></span><br><span class="line">        <span class="keyword">int</span>[] charArray = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">26</span>];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 开始计算，标志该节点已经计算过</span></span><br><span class="line">        result[index] = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 获得其关联的节点</span></span><br><span class="line">        List&lt;Integer&gt; nodes = tree[index];</span><br><span class="line">        <span class="comment">// 遍历</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> node : nodes) &#123;</span><br><span class="line">            <span class="comment">// 如果该节点已经访问过</span></span><br><span class="line">            <span class="keyword">if</span> (result[node] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 递归遍历子节点</span></span><br><span class="line">            <span class="keyword">int</span>[] array = dfs(node);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++) &#123;</span><br><span class="line">                charArray[i] += array[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 将当前节点的值计算一下</span></span><br><span class="line">        charArray[nodeValueArray[index]] += <span class="number">1</span>;</span><br><span class="line">        result[index] = charArray[nodeValueArray[index]];</span><br><span class="line">        <span class="keyword">return</span> charArray;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>提交之后，执行用时是<code>96ms</code>，内存消耗是<code>402.2MB</code>。看来优化的效果并不明显。</p>
+<h3 id="研究一下目前最优解法"><a href="#研究一下目前最优解法" class="headerlink" title="研究一下目前最优解法"></a>研究一下目前最优解法</h3><p>这个解法真的是巧妙，执行用时<code>20ms</code>，超过了<code>100%</code>，内存消耗<code>76.3MB</code>，超过了<code>100%</code>。</p>
+<p>我在代码中增加了注释，方便大家理解。但这样的写法，研究一下是能够看懂，但让我想估计是永远不可能想出来，可以让大家也一起学习和借鉴：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Next</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Next next;</span><br><span class="line">    Node node;</span><br><span class="line"></span><br><span class="line">    Next(Next next, Node node) &#123;</span><br><span class="line">      <span class="keyword">this</span>.next = next;</span><br><span class="line">      <span class="keyword">this</span>.node = node;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 当前节点的index</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> index;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 当前节点对应的字符值（减去'a'）</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> ci;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 所有关联的节点</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    Next children;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 该节点的父节点</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    Node parent;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 子树中和该节点含有相同字符的节点总个数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">int</span> result;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 是否还在队列中，可以理解为是否已访问过</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">boolean</span> inQueue;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> index, <span class="keyword">int</span> ci)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.index = index;</span><br><span class="line">      <span class="keyword">this</span>.ci = ci;</span><br><span class="line">      <span class="keyword">this</span>.result = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 从后往前，找到当前节点没有访问过的第一个子节点</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">Node <span class="title">popChild</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">for</span> (; ; ) &#123;</span><br><span class="line">        <span class="comment">// 当前节点的所有关联节点</span></span><br><span class="line">        Next n = <span class="keyword">this</span>.children;</span><br><span class="line">        <span class="comment">// 如果没有，说明子节点都遍历完了</span></span><br><span class="line">        <span class="keyword">if</span> (n == <span class="keyword">null</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 从后往前移除关联节点</span></span><br><span class="line">        <span class="keyword">this</span>.children = n.next;</span><br><span class="line">        <span class="comment">// 返回第一个没有访问过的节点</span></span><br><span class="line">        <span class="keyword">if</span> (!n.node.inQueue) &#123;</span><br><span class="line">          <span class="keyword">return</span> n.node;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 访问了该节点</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">Node <span class="title">enqueue</span><span class="params">(Node[] cnodes)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// 该节点标记为访问过</span></span><br><span class="line">      <span class="keyword">this</span>.inQueue = <span class="keyword">true</span>;</span><br><span class="line">      <span class="comment">// 记录该节点的父节点</span></span><br><span class="line">      <span class="keyword">this</span>.parent = cnodes[ci];</span><br><span class="line">      <span class="comment">// 那么现在该字符值对应的最高节点，就是当前节点。</span></span><br><span class="line">      <span class="comment">// 这样如果之后也遇到相同字符的子节点，就可以为子节点赋值其父节点，也就是上面一行是有效的</span></span><br><span class="line">      cnodes[ci] = <span class="keyword">this</span>;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 退出该节点</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dequeue</span><span class="params">(Node[] cnodes, <span class="keyword">int</span>[] res)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// 之后会访问该节点的兄弟节点，因此父节点需要重新设置</span></span><br><span class="line">      cnodes[ci] = <span class="keyword">this</span>.parent;</span><br><span class="line">      <span class="comment">// 设置当前节点的值</span></span><br><span class="line">      res[index] = <span class="keyword">this</span>.result;</span><br><span class="line">      <span class="comment">// 父节点也可以进行累加</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.parent != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.parent.result += <span class="keyword">this</span>.result;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">link</span><span class="params">(Node x)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// this节点和x节点，互相绑定</span></span><br><span class="line">      <span class="keyword">this</span>.children = <span class="keyword">new</span> Next(<span class="keyword">this</span>.children, x);</span><br><span class="line">      x.children = <span class="keyword">new</span> Next(x.children, <span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">int</span>[] countSubTrees(<span class="keyword">int</span> n, <span class="keyword">int</span>[][] edges, String labels) &#123;</span><br><span class="line">    <span class="comment">// 构造树</span></span><br><span class="line">    Node[] nodes = <span class="keyword">new</span> Node[n];</span><br><span class="line">    <span class="comment">// 每个节点对应的字符</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">      nodes[i] = <span class="keyword">new</span> Node(i, labels.charAt(i) - <span class="string">'a'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 通过边的关系，将节点互相绑定</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span>[] es : edges) &#123;</span><br><span class="line">      nodes[es[<span class="number">0</span>]].link(nodes[es[<span class="number">1</span>]]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 最终的结果</span></span><br><span class="line">    <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">    <span class="comment">// 当前访问的节点下标</span></span><br><span class="line">    <span class="keyword">int</span> sz = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 26个小写英文字母对应的节点数组</span></span><br><span class="line">    Node[] cnodes = <span class="keyword">new</span> Node[<span class="number">26</span>];</span><br><span class="line">    <span class="comment">// 下面三行可以合并成这一行：</span></span><br><span class="line">    <span class="comment">// Node node = nodes[sz++] = nodes[0].enqueue(cnodes);</span></span><br><span class="line">    nodes[sz] = nodes[<span class="number">0</span>].enqueue(cnodes);</span><br><span class="line">    <span class="comment">// 当前访问的节点</span></span><br><span class="line">    Node node = nodes[sz];</span><br><span class="line">    <span class="comment">// 因为当前节点已经访问过，自然下标需要+1</span></span><br><span class="line">    sz++;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (; ; ) &#123;</span><br><span class="line">      <span class="comment">// 从后往前，找到当前节点没有访问过的第一个子节点</span></span><br><span class="line">      Node child = node.popChild();</span><br><span class="line">      <span class="comment">// 如果已经全部访问过了</span></span><br><span class="line">      <span class="keyword">if</span> (child == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="comment">// 开始计算</span></span><br><span class="line">        node.dequeue(cnodes, res);</span><br><span class="line">        <span class="keyword">if</span> (--sz == <span class="number">0</span>) &#123;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 回溯到父节点</span></span><br><span class="line">        node = nodes[sz - <span class="number">1</span>];</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 保证了相邻节点一定是父子节点</span></span><br><span class="line">        node = nodes[sz++] = child.enqueue(cnodes);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上就是这道题目我的解答过程了，不知道大家是否理解了。本题主要在于对树这种数据结构的考察，以及深度优先遍历的使用，优化时可以采取空间换时间的策略。</p>
+<p>有兴趣的话可以访问我的博客或者关注我的公众号、头条号，说不定会有意外的惊喜。</p>
+<p><a href="https://death00.github.io/" target="_blank" rel="noopener">https://death00.github.io/</a></p>
+<p>公众号：健程之道</p>
+<p><img src="https://static01.imgkr.com/temp/dcfad764025e4ea9ab8d73ef0934efdd.png" alt=""></p>
+<p><img src="https://static01.imgkr.com/temp/003e8c4d5f5544b0bd70dfe7aa63bf60.png" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="健健 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果您感觉文章不错，也愿意支持一下作者的话</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://github.com/death00/gitment-comments/blob/master/imgs/wechatpay.jpg?raw=true" alt="健健 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/树/" rel="tag"># 树</a>
+          
+            <a href="/tags/深度优先遍历/" rel="tag"># 深度优先遍历</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/09/剑指offer 43——1～n整数中1出现的次数/" rel="next" title="剑指offer 43——1～n整数中1出现的次数">
+                <i class="fa fa-chevron-left"></i> 剑指offer 43——1～n整数中1出现的次数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/08/26/力扣1514——概率最大的路径/" rel="prev" title="力扣1514——概率最大的路径">
+                力扣1514——概率最大的路径 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    <!-- 广告 -->
+    <div id="googleAdsense">
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-6280366874210357"
+     data-ad-slot="3636563035"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+    </div>
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+  <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+<script>
+    const btw = new BTWPlugin();
+    btw.init({
+        id: 'container-1',
+        blogId: '15644-1569466671335-848',
+        name: '健程之道',
+        qrcode: 'https://raw.githubusercontent.com/death00/gitment-comments/master/imgs/wechat-qcode.jpg',
+        keyword: 'git',
+    });
+</script>
+
+
+
+            </div>
+          </div>
+          
+
+
+          
+
+  
+    <div id="gitalk-container"></div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">健健</p>
+              <p class="site-description motion-element" itemprop="description">初级程序员的健壮之路</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">91</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/death00" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:924325679@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原题"><span class="nav-number">1.</span> <span class="nav-text">原题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解题"><span class="nav-number">2.</span> <span class="nav-text">解题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#首次尝试"><span class="nav-number">2.1.</span> <span class="nav-text">首次尝试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双向记录构造树"><span class="nav-number">2.2.</span> <span class="nav-text">双向记录构造树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用空间换时间"><span class="nav-number">2.3.</span> <span class="nav-text">用空间换时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#研究一下目前最优解法"><span class="nav-number">2.4.</span> <span class="nav-text">研究一下目前最优解法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">健健</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/src/md5.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'cdd22c7b695e669f49e1',
+          clientSecret: '9a5fbb28c437389a2505a531eb66e81f0d50fba5',
+          repo: 'gitment-comments',
+          owner: 'death00',
+          admin: ['death00'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('-1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("7G7a3bHaHCXpcgG33yxsMxce-gzGzoHsz", "U6qFIjsUE2IbmyYzRosXolkp");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook,Evernote";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
